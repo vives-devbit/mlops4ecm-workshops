@@ -1,0 +1,26 @@
+name: Run tests and format check
+
+on:
+  pull_request:
+  workflow_dispatch:
+
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Install dependencies
+        run: pip install black pytest
+
+      - name: Run tests
+        run: pytest
+
+      - name: Check code formatting
+        run: black --check .

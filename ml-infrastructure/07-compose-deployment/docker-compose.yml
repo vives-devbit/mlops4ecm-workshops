@@ -1,0 +1,15 @@
+services:
+  backend:
+    build: ./backend
+    container_name: grocery-backend
+    ports:
+      - "8000:8000"
+    restart: always
+
+  frontend:
+    build: ./frontend
+    container_name: grocery-frontend
+    ports:
+      - "8050:8050"
+    restart: always
+
