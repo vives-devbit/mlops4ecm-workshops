@@ -37,7 +37,7 @@ Package both the frontend and backend into Docker containers to ensure reproduci
 
 ### 07 – [Compose Deployment](07-compose-deployment/)
 
-Use Docker Compose to launch your entire application stack (API + frontend) with a single command. Test multi-container orchestration locally.
+Use Docker Compose to launch your entire application stack (API + frontend) with a single command. Deploy your application to a production environment via GitHub or a Docker registry.
 
 ### 08 – [Deploy Model from S3](08-deploy-model-from-s3/)
 
@@ -53,7 +53,7 @@ Upload new images and labels through the frontend to expand your dataset. Add a 
 
 ### 11 – [Pull Request Checks](11-pull-request-checks/)
 
-Add automated checks for code quality and correctness using GitHub Actions. Run `black`, `ruff`, and `pytest` on every pull request.
+Add automated checks for code quality and correctness using GitHub Actions. Run `black` and `pytest` on every pull request.
 
 ### 12 – [Automatic Deployment](12-automatic-deployment/)
 
@@ -70,8 +70,7 @@ By the end of these labs, you'll have built a real, end-to-end machine learning 
 - Ingest and process data
 - Train and evaluate models
 - Serve predictions via API and UI
-- Scale using containers
-- Automate deployments and retraining workflows
+- Automate deployments and retraining
 
 You'll also gain hands-on experience with tools like **FastAPI**, **Docker**, **MinIO**, **GitHub Actions**, and **Dagster** — all key components of a modern MLOps toolkit.
 

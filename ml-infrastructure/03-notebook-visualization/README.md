@@ -1,7 +1,9 @@
 
-# Notebook visualization
+# 03 – Notebook Visualization
 
 <img src="../../media/notebook-visualization.jpg" style="width: 300px" align="right">
+
+> Use notebooks to explore model performance, including confusion matrices and dataset analysis. Understand the value of post-training visualization.
 
 IDEA Notebooks are still really great for exploring and visualizing! Don't forget that.
 Now that we have refactored Python code we can create multiple notebooks to  explore different things.

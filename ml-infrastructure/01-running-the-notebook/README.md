@@ -3,6 +3,8 @@
 
 <img src="../../media/jupyter-notebooks-exploration-analogy-paper.jpg" style="width: 300px" align="right">
 
+> Set up a virtual machine, configure your Python environment, and run a notebook that trains a MobileNet classifier on grocery item images.
+
 Welcome to the starting point of your machine learning journey.
 
 In this exercise, you'll:
@@ -46,7 +48,7 @@ Once you're connected to the remote machine via VS Code:
 Then run the following command to clone the course repository:
 
 ```bash
-git clone https://github.com/vives-devbit/<date>-mlops-workshops.git
+git clone https://github.com/AlexanderDhoore/<date>-mlops-workshop.git
 ```
 
 Replace `<date>` with the actual date of your workshop.
@@ -78,9 +80,7 @@ Here you’ll find a training notebook that we’ll use in the next step.
 
 Open the notebook file `grocery-store.ipynb` in VS Code and try running the cells.
 
-When you try to run a cell, VS Code may prompt you to install recommended extensions like **Python** and **Jupyter**.
-
-> Go ahead and install them if prompted.
+When you try to run a cell, VS Code may prompt you to install recommended extensions like **Python** and **Jupyter**. Go ahead and install them if prompted.
 
 Then, VS Code will ask you to **select a kernel**. Choose:
 
@@ -95,18 +95,6 @@ Follow these steps:
 
 VS Code will now automatically create a virtual environment and install all required dependencies.
 
-### Run the notebook
-
-Once the setup is complete, try running the notebook cells again.
-
-You should now see:
-
-* A training loop using MobileNetV3.
-* Output showing training loss and validation accuracy.
-* Some example predictions visualized inline.
-
-Congratulations! You've just trained and evaluated your first image classifier.
-
 ### 💡 Note for advanced users
 
 If you prefer to set up the environment manually via the terminal, you can do so:
@@ -119,9 +107,25 @@ pip install -r requirements.txt
 
 Then reopen the notebook and select this virtual environment as your kernel.
 
+### Run the notebook
+
+<img src="../../media/grocery-store-milk.jpg" style="width: 300px" align="right">
+
+Once the setup is complete, try running the notebook cells again.
+
+You should now see:
+
+* A training loop using MobileNetV3.
+* Output showing training loss and validation accuracy.
+* Some example predictions visualized inline.
+
+Congratulations! You've just trained and evaluated your first image classifier.
+
 ### See what changed in the notebook
 
 Before moving on, let’s take a moment to look at what actually changed when you ran the notebook.
+
+**If you haven't already, save the notebook. CTRL+S**
 
 #### 🧭 Using the VS Code interface:
 
@@ -135,9 +139,9 @@ VS Code will show you what changed inside the notebook:
 * Metadata like timestamps or kernel info
 * Cell outputs (e.g. training progress, printed results)
 
-Even though you didn’t change your actual code, you’ll see a **lot of noise** in the diff. This is a great example of why notebooks are hard to track with Git.
+Even though you **didn’t change your actual code**, you’ll see a **lot of noise** in the diff. This is a great example of why notebooks are hard to track with Git.
 
-> 💡 This is one of the main reasons we’ll move to Python scripts in the next step — scripts produce clean, readable diffs that are much easier to review and version.
+💡 This is one of the main reasons we’ll move to Python scripts in the next step — scripts produce clean, readable diffs that are much easier to review and version.
 
 #### 🧠 Optional: View the same in the terminal
 
@@ -148,6 +152,16 @@ git diff
 ```
 
 This will dump the changes in plain text — note how verbose and unreadable the notebook format becomes!
+
+#### 🧠 Optional: Use `nbdime` for cleaner notebook diffs
+
+If you want a more structured and readable diff for Jupyter notebooks, try using `nbdime`:
+
+```bash
+pip install nbdime
+```
+
+For more information, visit the documentation: [https://nbdime.readthedocs.io](https://nbdime.readthedocs.io)
 
 ## ✅ Next Step
 
