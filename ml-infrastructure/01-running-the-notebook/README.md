@@ -105,7 +105,7 @@ source venv/bin/activate
 pip install -r requirements.txt
 ```
 
-Then reopen the notebook and select this virtual environment as your kernel.
+Then reopen the notebook and select this virtual environment as your kernel (top-right of the notebook).
 
 ### Run the notebook
 
@@ -139,23 +139,25 @@ VS Code will show you what changed inside the notebook:
 * Metadata like timestamps or kernel info
 * Cell outputs (e.g. training progress, printed results)
 
-Even though you **didn’t change your actual code**, you’ll see a **lot of noise** in the diff. This is a great example of why notebooks are hard to track with Git.
+Even though you **didn’t change your actual code**, you’ll see a **lot of noise** in the diff. This is a great example of why notebooks are hard to track with Git. In fact, VS Code is already doing you a favour here — it shows a **clean, human-readable view** of the notebook diff.
 
-💡 This is one of the main reasons we’ll move to Python scripts in the next step — scripts produce clean, readable diffs that are much easier to review and version.
+Behind the scenes, notebooks are saved as **large JSON files**, and things like metadata or image outputs are stored as raw data or base64-encoded blobs. These aren't easy to read or version properly. So while VS Code makes it look manageable, the actual file format is much messier.
 
-#### 🧠 Optional: View the same in the terminal
+#### 🧠 Viewing the Raw Notebook Diff
 
-If you’re curious, you can also see the raw diff using the terminal:
+If you want to see what the notebook file really looks like under the hood, run:
 
 ```bash
 git diff
 ```
 
-This will dump the changes in plain text — note how verbose and unreadable the notebook format becomes!
+This shows the raw contents of the `.ipynb` file — which includes not just your code, but all kinds of metadata, and even full image outputs as base64 strings. It’s verbose and often unreadable.
 
-#### 🧠 Optional: Use `nbdime` for cleaner notebook diffs
+This reinforces why we’ll soon move from notebooks to Python scripts: plain `.py` files produce much cleaner diffs, are easier to version, and don’t clutter your Git history with unrelated noise.
 
-If you want a more structured and readable diff for Jupyter notebooks, try using `nbdime`:
+#### Optional: Use `nbdime` for cleaner notebook diffs
+
+If you want a more readable diff for notebooks on the command line, try using `nbdime`:
 
 ```bash
 pip install nbdime
