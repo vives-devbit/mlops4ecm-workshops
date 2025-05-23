@@ -1,5 +1,5 @@
 
-# 01 – Running the Notebook
+# Lab 01 – Running the Notebook
 
 <img src="../../media/jupyter-notebooks-exploration-analogy-paper.jpg" style="width: 300px" align="right">
 
@@ -34,7 +34,8 @@ You can connect to the VM using regular SSH in a terminal, but for this course, 
 * VS Code may ask you if you **trust the remote machine** – click **Yes**.
 * It will ask **where to store your SSH configuration** – just pick the **first option**.
 * Once connected, VS Code will open a **remote window** linked to your virtual machine.
-* Finally, it will ask **what operating system the remote machine is** – choose **Linux**.
+* It will ask **what operating system the remote machine is** – choose **Linux**.
+* Finally, it will ask for the **password**.
 
 Note: If you prefer the command line or want to quickly check VM access, you can also SSH from your terminal using `ssh root@ip-address`.
 
