@@ -19,7 +19,6 @@ Keep the notebook, but turn it into a lightweight driver: it loads the modules, 
 ### ✅ Suggested File Structure
 
 ```
-02-refactor-the-notebook/
 ├── data_utils.py          # Data loading and transforms
 ├── model_utils.py         # Model setup, load/save to disk
 ├── train_utils.py         # Training + evaluation logic

@@ -20,27 +20,48 @@ These notebooks:
 
 By keeping notebooks small and focused, you make your project easier to debug, extend, and understand — even for future collaborators.
 
-## 📁 Recommended Folder Structure
+## 📁 Suggested File Structure
 
 ```
-03-notebook-visualization/
-├── confusion_matrix.ipynb
 ├── dataset_analysis.ipynb
+├── confusion_matrix.ipynb
 └── prediction_gallery.ipynb
 ```
 
 Each notebook has a single goal. You can keep adding more notebooks later — thanks to your modular codebase, it’s easy.
 
-## 📊 Notebook 1 – `confusion_matrix.ipynb`
+## 🍓 Notebook 1 – `dataset_analysis.ipynb`
+
+> Explore the training data distribution. Are some classes over- or under-represented?
+
+Use this notebook to inspect your dataset’s structure and class imbalance. Look at:
+
+* Number of images per class (bar plot)
+
+This helps answer:
+
+* Are there more apple images than kiwi?
+* Are some classes extremely rare?
+
+Steps:
+
+* Load the `train.txt` or `val.txt` dataset CSVs
+* Group and count samples per class
+    - You can use the `pandas` library, if you know it
+    - Otherwise just use pure Python code (loops)
+* Visualize class counts as a bar chart
+    - Use `matplotlib` to draw the graph
+
+## 📊 Notebook 2 – `confusion_matrix.ipynb`
 
 > Visualize how your model performs across different classes. Which categories does it confuse?
 
-Use `sklearn.metrics.confusion_matrix` to generate a matrix comparing **true vs. predicted labels**. Then use `seaborn.heatmap` or `matplotlib` to visualize the result.
+Use `sklearn.metrics.confusion_matrix` to generate a matrix comparing **true vs. predicted labels**. Then use `matplotlib` to visualize the result.
 
 This will help you identify weak spots in your model. For example:
 
-* Does it confuse apples with tomatoes?
-* Are dairy products harder to classify than snacks?
+* Does it confuse apples with kiwis?
+* Are dairy products harder to classify than fruit?
 
 Steps:
 
@@ -49,29 +70,9 @@ Steps:
 * Collect predicted and true labels
 * Visualize the confusion matrix
 
-## 🍓 Notebook 2 – `dataset_analysis.ipynb`
+## 🎁 Bonus Exercises
 
-> Explore the training data distribution. Are some classes over- or under-represented?
-
-Use this notebook to inspect your dataset’s structure and balance. Look at:
-
-* Number of images per class (bar plot)
-* Examples from each class (image grid)
-
-This helps answer:
-
-* Are there more apple images than kiwi?
-* Are some classes extremely rare?
-* Does the model perform worse on underrepresented classes?
-
-Steps:
-
-* Load the `train.txt` or `val.txt` dataset CSVs
-* Use pandas to group and count samples per class
-* Visualize class counts as a bar chart
-* Optionally show 2–3 example images per class
-
-## 🤖 Notebook 3 – `prediction_gallery.ipynb`
+### 🤖 Notebook 3 – `prediction_gallery.ipynb` (Optional)
 
 > Build a lightweight prediction tool using **Gradio** for interactive exploration.
 
@@ -81,33 +82,28 @@ Use the [Gradio](https://gradio.app/) library to create a UI that lets you:
 * Show a few images from that class
 * Run your model on them and display the predictions
 
-Or:
-
-* Let the user pick from a dropdown list of image files
-* Run inference on that image and show prediction + confidence
-
 This notebook creates a **mini demo** of your model — useful for presentations, quick tests, or debugging.
 
 Steps:
 
 * Install Gradio: `pip install gradio`
 * Load your saved model and data loader
-* Create a UI with dropdowns, buttons, or image previews
-* Launch it inside the notebook or in your browser
+* Create a UI with dropdowns, buttons, and image previews
+* Launch it inside the notebook (or in your browser)
 
 ## 🧠 Key Takeaways
 
 * Keep notebooks short and focused on one goal
 * Load models and data from utility modules
 * Use Python scripts for training — use notebooks for insight
-* Use visual tools (like heatmaps and interactive UIs) to spot problems early
+* Use visual tools (like confusion matrix and interactive UIs) to spot problems early
 
 ## ✅ What You Should Have After This Lab
 
 By the end of Lab 03, you’ll have a growing collection of “data science” notebooks that:
 
-* Explain how your model performs (and where it fails)
 * Show what’s in your dataset
+* Explain how your model performs (and where it fails)
 * Provide an easy way to explore predictions
 
 These notebooks are **useful, shareable, and explainable** — perfect for internal demos, team handoffs, or debugging sessions.
