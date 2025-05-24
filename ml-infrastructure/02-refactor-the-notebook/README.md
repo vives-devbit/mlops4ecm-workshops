@@ -1,22 +1,22 @@
-# Lab 02 – Refactor the Notebook
+## Lab 02 – Refactor the Notebook
 
 <img src="../../media/notebooks-refactoring-cleanup.jpg" style="width: 300px" align="right">
 
 > Turn your Jupyter notebook into a clean, testable Python project. Refactor the code into reusable modules, build a script for automated training, and add your first unit tests.
 
-## 🧭 Objective
+### 🧭 Objective
 
 This lab marks your transition from **exploration** to **engineering**.
 
-You'll split the original `grocery-store.ipynb` notebook into reusable modules, add a configurable training script, and write a unit test to verify that your dataloader works. After this lab, you'll have a clean and modular codebase that's easier to debug, test, and extend — and you’ll be ready for automation and deployment.
+You'll split the original `grocery-store.ipynb` notebook into reusable modules, add a configurable training script, and write a unit test to verify that your dataloader works. After this lab, you'll have a **clean and modular** codebase that's easier to debug, test, and extend — and you’ll be ready for automation and deployment.
 
-## 🔧 Step 1 – Refactor the Notebook into Modules
+### 🔧 Step 1 – Refactor the Notebook into Modules
 
 The goal here is to **extract core logic** from the notebook into Python modules.
 
 Keep the notebook, but turn it into a lightweight driver: it loads the modules, trains a model, prints accuracy, and shows sample predictions — just like before. But the logic lives elsewhere.
 
-### ✅ Suggested File Structure
+#### ✅ Suggested File Structure
 
 ```
 ├── data_utils.py          # Data loading and transforms
@@ -29,7 +29,7 @@ Keep the notebook, but turn it into a lightweight driver: it loads the modules, 
 
 You can optionally organize your code into subfolders with `__init__.py` files to create a **package** structure. This makes imports cleaner and helps keep related code grouped, which is especially useful as your project grows. It’s **not required** for this lab, but it mirrors how larger ML projects are typically structured.
 
-### 📦 What goes where?
+#### 📦 What goes where?
 
 - **`data_utils.py`**
   - `DATA_DIR` and `CSV` definitions
@@ -65,7 +65,7 @@ You can optionally organize your code into subfolders with `__init__.py` files t
 
 The actual “visual” code can stay in the notebook — for example, drawing images with Matplotlib and showing predictions alongside them. That kind of code belongs in a notebook.
 
-## 🚀 Step 2 – Add a Configurable Training Script
+### 🚀 Step 2 – Add a Configurable Training Script
 
 You now build a standalone script: `run_training.py`
 
@@ -108,7 +108,7 @@ Can you find the **optimal batch size and learning rate** to get the best perfor
 ➡️ This is one of the **big advantages of script-based training**: fast, repeatable experimentation without the overhead of a notebook interface.
 
 
-## 🧪 Step 3 – Add a Unit Test with PyTest
+### 🧪 Step 3 – Add a Unit Test with PyTest
 
 Focus on testing your **data pipeline**, since that's often a source of subtle bugs.
 
@@ -120,7 +120,7 @@ pip install pytest
 
 Create a test file: `test_dataloader.py`
 
-### ✅ Example Test
+#### ✅ Example Test
 
 ```python
 def test_dataloader_shapes():
@@ -131,7 +131,7 @@ def test_dataloader_shapes():
     assert labels.ndim == 1
 ```
 
-### 🧠 Other Ideas
+#### 🧠 Other Ideas
 
 * Check that dataset length is > 0
 * Check that label values are integers
@@ -145,9 +145,9 @@ pytest
 
 ➡️ This is your **first automated quality check**. We'll expand this idea later using GitHub Actions.
 
-## 🎁 Bonus Exercises
+### 🎁 Bonus Exercises
 
-### 🌀 Convert the Notebook Automatically (Optional)
+#### 🌀 Convert the Notebook Automatically (Optional)
 
 Try turning your original notebook into a `.py` script using:
 
@@ -157,7 +157,7 @@ jupyter nbconvert --to script grocery-store.ipynb
 
 This won't be perfect, but it's a useful starting point when refactoring.
 
-### 🚀 Speed Up Training by Preprocessing Images (Optional)
+#### 🚀 Speed Up Training by Preprocessing Images (Optional)
 
 Currently, your model resizes and normalizes images **on the fly**. This slows down training.
 
@@ -171,7 +171,7 @@ Use the `time` module to track epoch duration.
 
 ➡️ This is your first taste of **ML performance tuning**.
 
-## ✅ Summary
+### ✅ Summary
 
 After completing Lab 02, your project is no longer just a notebook — it’s a **real Python codebase**:
 

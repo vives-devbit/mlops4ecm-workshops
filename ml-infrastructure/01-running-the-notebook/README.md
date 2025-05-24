@@ -1,5 +1,5 @@
 
-# Lab 01 – Running the Notebook
+## Lab 01 – Running the Notebook
 
 <img src="../../media/jupyter-notebooks-exploration-analogy-paper.jpg" style="width: 300px" align="right">
 
@@ -13,8 +13,6 @@ In this exercise, you'll:
 * Set up a Python virtual environment.
 * Install the Python dependencies.
 * Run the Jupyter Notebook that trains a MobileNet classifier on grocery item images.
-
-## 🚀 Exercise Instructions
 
 ### Set up Visual Studio Code with Remote SSH
 
@@ -126,9 +124,9 @@ Congratulations! You've just trained and evaluated your first image classifier.
 
 Before moving on, let’s take a moment to look at what actually changed when you ran the notebook.
 
-**If you haven't already, save the notebook. CTRL+S**
+If you haven't already, **save the notebook. CTRL+S**
 
-#### 🧭 Using the VS Code interface:
+Using the VS Code interface:
 
 1. Click on the **Source Control** icon in the left-hand sidebar (the one that looks like a branch or Y-shape).
 2. You’ll see one or more **pending changes** listed—most notably, `grocery-store.ipynb`.
@@ -144,19 +142,24 @@ Even though you **didn’t change your actual code**, you’ll see a **lot of no
 
 Behind the scenes, notebooks are saved as **large JSON files**, and things like metadata or image outputs are stored as raw data or base64-encoded blobs. These aren't easy to read or version properly. So while VS Code makes it look manageable, the actual file format is much messier.
 
-#### 🧠 Viewing the Raw Notebook Diff
+### 🧠 Viewing the Raw Notebook Diff
 
-If you want to see what the notebook file really looks like under the hood, run:
+Now open a **terminal**. To see what the notebook file really looks like under the hood, run:
 
 ```bash
 git diff
 ```
 
+- Press the key "d" a few times to go **down** in the diff.
+- Press the key "q" to **quit** the diff.
+
 This shows the raw contents of the `.ipynb` file — which includes not just your code, but all kinds of metadata, and even full image outputs as base64 strings. It’s verbose and often unreadable.
 
 This reinforces why we’ll soon move from notebooks to Python scripts: plain `.py` files produce much cleaner diffs, are easier to version, and don’t clutter your Git history with unrelated noise.
 
-#### Optional: Use `nbdime` for cleaner notebook diffs
+### 🎁 Bonus Exercise
+
+#### Use `nbdime` for cleaner notebook diffs (Optional)
 
 If you want a more readable diff for notebooks on the command line, try using `nbdime`:
 
@@ -166,6 +169,6 @@ pip install nbdime
 
 For more information, visit the documentation: [https://nbdime.readthedocs.io](https://nbdime.readthedocs.io)
 
-## ✅ Next Step
+### ✅ Next Step
 
 Once you've successfully run the notebook, you're ready to move on to the next exercise: **refactoring the notebook into reusable Python scripts.**

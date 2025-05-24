@@ -9,6 +9,12 @@ Each lab builds on the previous one, gradually introducing real-world tools and 
 
 <img src="../media/ml-infrastructure-server-rack-data-center.jpg" style="width: 300px" align="right">
 
+**TODO Copy paste the quotes from the lab contents**
+
+**TODO Copy paste the quotes from the lab contents**
+
+**TODO Copy paste the quotes from the lab contents**
+
 ### 01 – [Running the Notebook](01-running-the-notebook/)
 
 Set up a virtual machine, configure your Python environment, and run a notebook that trains a MobileNet classifier on grocery item images.

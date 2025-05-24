@@ -1,11 +1,11 @@
 
-# Lab 03 – Notebook Visualization
+## Lab 03 – Notebook Visualization
 
 <img src="../../media/notebook-visualization.jpg" style="width: 300px" align="right">
 
 > Use Jupyter notebooks to explore model behavior, identify weak spots, and inspect dataset structure. No training is performed here — just analysis and visualization.
 
-## 🧭 Objective
+### 🧭 Objective
 
 In the previous lab, you refactored your code into clean Python modules and created a training notebook (`grocery-store.ipynb`) that loads modules, trains a model, and visualizes a few predictions.
 
@@ -28,7 +28,7 @@ By keeping notebooks small and focused, you make your project easier to debug, e
 
 Each notebook has a single goal. You can keep adding more notebooks later — thanks to your modular codebase, it’s easy.
 
-## 🍓 Notebook 1 – `dataset_analysis.ipynb`
+### 🍓 Notebook 1 – `dataset_analysis.ipynb`
 
 > Explore the training data distribution. Are some classes over- or under-represented?
 
@@ -69,9 +69,9 @@ Steps:
 * Create a UI with dropdowns, buttons, and image previews
 * Launch it inside the notebook (or in your browser)
 
-## 🎁 Bonus Exercise
+### 🎁 Bonus Exercise
 
-### 📊 Notebook 3 – `confusion_matrix.ipynb` (Optional)
+#### 📊 Notebook 3 – `confusion_matrix.ipynb` (Optional)
 
 > Visualize how your model performs across different classes. Which categories does it confuse?
 
@@ -89,19 +89,11 @@ Steps:
 * Collect predicted and true labels
 * Visualize the confusion matrix
 
-## 🧠 Key Takeaways
+### 🧠 Key Takeaways
 
 * Keep notebooks short and focused on one goal
 * Load models and data from utility modules
 * Use Python scripts for training — use notebooks for insight
-* Use visual tools (like confusion matrix and interactive UIs) to spot problems early
-
-## ✅ What You Should Have After This Lab
-
-By the end of Lab 03, you’ll have a growing collection of “data science” notebooks that:
-
-* Show what’s in your dataset
-* Explain how your model performs (and where it fails)
-* Provide an easy way to explore predictions
+* Use visual tools (like interactive UIs) to spot problems early
 
 These notebooks are **useful, shareable, and explainable** — perfect for internal demos, team handoffs, or debugging sessions.
