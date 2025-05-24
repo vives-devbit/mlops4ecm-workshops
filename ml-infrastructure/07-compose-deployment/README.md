@@ -3,7 +3,7 @@
 
 <img src="../../media/docker-compose-octopus.jpg" style="width: 300px" align="right">
 
-> In this lab, you’ll use Docker Compose to launch your entire application — both the FastAPI backend and the Dash frontend — with a **single command**. After that, you’ll deploy the full project to a **production VM** using GitHub.
+> Use Docker Compose to launch your entire application stack (API + frontend) with a single command. Deploy your application to a production environment via GitHub or a Docker registry.
 
 ### 🧱 Part 1 – Local Compose Setup
 
