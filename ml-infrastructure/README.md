@@ -65,10 +65,6 @@ Add automated checks for code quality and correctness using GitHub Actions. Run 
 
 Install a self-hosted GitHub Actions runner on your VM. Configure a workflow to automatically deploy your app with Docker Compose on every push to `main`.
 
-### 13 – [Dagster Pipeline](13-dagster-pipeline/)
-
-Set up Dagster to orchestrate ML pipelines: detect new data in S3, retrain the model, and store updated outputs. Run pipelines manually or on a schedule.
-
 ## 🚀 Goal of the Workshop
 
 By the end of these labs, you'll have built a real, end-to-end machine learning system that can:
@@ -78,7 +74,7 @@ By the end of these labs, you'll have built a real, end-to-end machine learning 
 - Serve predictions via API and UI
 - Automate deployments and retraining
 
-You'll also gain hands-on experience with tools like **FastAPI**, **Docker**, **MinIO**, **GitHub Actions**, and **Dagster** — all key components of a modern MLOps toolkit.
+You'll also gain hands-on experience with tools like **FastAPI**, **Docker Compose**, **MinIO S3**, and **GitHub Actions** — all key components of a modern MLOps toolkit.
 
 ## 🛠️ Prerequisites
 
