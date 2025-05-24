@@ -47,7 +47,7 @@ Once you're connected to the remote machine via VS Code:
 Then run the following command to clone the course repository:
 
 ```bash
-git clone https://github.com/AlexanderDhoore/<date>-mlops-workshop.git
+git clone https://github.com/AlexanderDhoore/<date>-mlops-workshops.git
 ```
 
 Replace `<date>` with the actual date of your workshop.
