@@ -1,5 +1,5 @@
 
-# 12 – Automatic Deployment
+# 10 – Automatic Deployment
 
 <img src="../../media/github-action-runners.png" style="width: 300px" align="right">
 

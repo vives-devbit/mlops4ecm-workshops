@@ -41,17 +41,13 @@ Use Docker Compose to launch your entire application stack (API + frontend) with
 
 ### Lab 08 – [Deploy Model from S3](08-deploy-model-from-s3/)
 
-Set up a local S3-compatible storage server (MinIO), upload your trained model, and configure your API to load the model from S3.
-
-### Lab 09 – [Train on S3 Dataset](09-train-on-s3-dataset/)
-
 Move your training dataset to S3 and modify your code to load it from object storage instead of local disk — just like in cloud pipelines.
 
-### Lab 10 – [Pull Request Checks](10-pull-request-checks/)
+### Lab 09 – [Pull Request Checks](09-pull-request-checks/)
 
 Add automated checks for code quality and correctness using GitHub Actions. Run `black` and `pytest` on every pull request.
 
-### Lab 11 – [Automatic Deployment](11-automatic-deployment/)
+### Lab 10 – [Automatic Deployment](10-automatic-deployment/)
 
 Install a self-hosted GitHub Actions runner on your VM. Configure a workflow to automatically deploy your app with Docker Compose on every push to `main`.
 
