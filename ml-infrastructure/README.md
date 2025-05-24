@@ -45,7 +45,7 @@ Move your training dataset to S3 and modify your code to load it from object sto
 
 ### Lab 09 – [Pull Request Checks](09-pull-request-checks/)
 
-Add automated checks for code quality and correctness using GitHub Actions. Run `black` and `pytest` on every pull request.
+Add continuous integration (CI) checks to your project using GitHub Actions. Automatically test your code and check formatting every time someone opens a pull request.
 
 ### Lab 10 – [Automatic Deployment](10-automatic-deployment/)
 
