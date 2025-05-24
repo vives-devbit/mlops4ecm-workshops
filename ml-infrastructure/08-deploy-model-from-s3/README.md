@@ -146,3 +146,9 @@ Add logic to **periodically check** for a newer model version in your MinIO buck
 * Compare timestamps or filenames.
 * Reload the model if a newer one appears.
 * Optionally run this check in a background thread.
+
+### ✅ Wrapping Up
+
+You’ve now connected model training and **deployment through S3** — a key pattern in real-world MLOps. By uploading models to object storage and loading them from there in production, you decouple the training pipeline from the serving system.
+
+This lays the groundwork for automation, versioning, and **scalable deployment**.

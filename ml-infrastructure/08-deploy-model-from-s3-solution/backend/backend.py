@@ -21,7 +21,7 @@ val_dataset = GroceryDataset(VAL_CSV, transform=None)
 
 @app.get("/class-names")
 def get_class_names():
-    """✅ TODO: Return a list of all class names."""
+    """✅ Return a list of all class names."""
     # Hint: class_names is a dictionary {index: name}
     # You need to return: {"classes": [...]}
     return {"classes": list(class_names.values())}
@@ -29,7 +29,7 @@ def get_class_names():
 
 @app.get("/random-image")
 def get_random_image():
-    """✅ TODO: Return a random image from the validation set."""
+    """✅ Return a random image from the validation set."""
     # Step 1: Pick a random index from val_dataset
     # Step 2: Get the PIL image at that index (val_dataset[index])
     # Step 3: Save it to a BytesIO buffer as JPEG
