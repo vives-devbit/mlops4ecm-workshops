@@ -123,8 +123,9 @@ Create a test file: `test_dataloader.py`
 #### ✅ Example Test
 
 ```python
-def test_dataloader_shapes():
-    from data_utils import get_loaders
+from data_utils import get_loaders
+
+def test_dataloader_basic():
     train_loader, _ = get_loaders(batch_size=4)
     images, labels = next(iter(train_loader))
     assert images.shape == (4, 3, 224, 224)
@@ -152,6 +153,8 @@ pytest
 Try turning your original notebook into a `.py` script using:
 
 ```bash
+pip install jupyter
+
 jupyter nbconvert --to script grocery-store.ipynb
 ```
 

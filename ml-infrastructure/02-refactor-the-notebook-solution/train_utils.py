@@ -24,7 +24,6 @@ def train_model(model, dataloader, epochs=5, learning_rate=1e-3):
         print(f"Epoch {epoch+1} - Loss: {total_loss / len(dataloader.dataset):.4f}")
 
 
-
 def evaluate_model(model, dataloader):
     """ Returns model accuracy. """
     model.eval()
