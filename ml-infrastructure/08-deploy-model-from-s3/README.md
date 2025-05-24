@@ -1,5 +1,7 @@
 ## Lab 08 – Deploy Model from S3
 
+<img src="../../media/s3-minio-logos-name.jpg" style="width: 300px" align="right">
+
 > In this lab, you'll store your trained model in S3-style object storage using **MinIO**, and make your FastAPI backend load it directly from there. This simulates how machine learning models are managed and deployed in real production environments.
 
 You’ll be given working infrastructure and code templates — your task is to fill in just a few missing pieces. Once completed, your system will:
@@ -64,9 +66,9 @@ docker compose -f compose-minio.yml up -d
 If everything works correctly, Docker will spin up a MinIO container and print something like:
 
 ```
-Creating network "08-deploy-model-from-s3-solution_default" ...
-Creating volume "minio-data" ...
-Creating minio ...
+[+] Running 2/2
+ ✔ Network 08-deploy-model-from-s3_default     Created
+ ✔ Container 08-deploy-model-from-s3-minio-1   Started
 ```
 
 #### ✅ 3. Visit the MinIO Web UI
@@ -83,7 +85,7 @@ Once logged in:
 
 1. Click **"Buckets"** in the left menu.
 2. Click **"Create Bucket"**
-3. Enter your chosen bucket name (e.g. `ml-models`) and click **"Create Bucket"**.
+3. Enter your `.env` BUCKET name (e.g. `ml-models`) and click **"Create Bucket"**.
 
 ✅ Your S3-compatible object storage is now ready to use.
 
@@ -91,8 +93,8 @@ Once logged in:
 
 To confirm that everything works:
 
-1. Click on the bucket you just created.
-2. Click **"Upload"**.
+1. Click on **"Object Browser"** in the left menu.
+2. Select your bucket and click **"Upload"**.
 3. Choose a simple file (e.g. a `.txt` or `.jpg`) from your computer.
 4. Click **"Upload"** to send it to the bucket.
 
@@ -102,8 +104,8 @@ If you see the file in the bucket, your MinIO server is working correctly — an
 
 Your training script is already set up to call an `upload_to_s3()` function — but that function needs to be implemented.
 
-1. Open `s3_utils.py` and fix the `upload_to_s3()` function.
-2. *(Optional but recommended)* Also implement `download_from_s3()` while you're in there.
+1. Open `s3_utils.py` and fix the `upload_to_s3()` function. [Documentation](https://boto3.amazonaws.com/v1/documentation/api/latest/guide/s3-uploading-files.html)
+2. (Needed later) Also implement `download_from_s3()` while you're in there. [Documentation](https://boto3.amazonaws.com/v1/documentation/api/latest/reference/services/s3/client/download_file.html)
 3. Run the training script:
 
    ```bash
