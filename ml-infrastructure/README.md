@@ -53,15 +53,11 @@ Set up a local S3-compatible storage server (MinIO), upload your trained model, 
 
 Move your training dataset to S3 and modify your code to load it from object storage instead of local disk — just like in cloud pipelines.
 
-### 10 – [Extend the Dataset](10-extend-the-dataset/)
-
-Upload new images and labels through the frontend to expand your dataset. Add a new class, retrain your model, and re-evaluate performance.
-
-### 11 – [Pull Request Checks](11-pull-request-checks/)
+### 10 – [Pull Request Checks](10-pull-request-checks/)
 
 Add automated checks for code quality and correctness using GitHub Actions. Run `black` and `pytest` on every pull request.
 
-### 12 – [Automatic Deployment](12-automatic-deployment/)
+### 11 – [Automatic Deployment](11-automatic-deployment/)
 
 Install a self-hosted GitHub Actions runner on your VM. Configure a workflow to automatically deploy your app with Docker Compose on every push to `main`.
 
