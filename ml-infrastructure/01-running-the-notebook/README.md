@@ -22,17 +22,17 @@ You can connect to the VM using regular SSH in a terminal, but for this course, 
 
 * Open **Visual Studio Code** on your local machine.
 * Install the **Remote - SSH** extension (if not already installed).
-* Click the **blue or green button in the bottom left corner**, or press `F1` and choose **“Remote-SSH: Connect to Host…”**.
+* Click the **blue or green button in the bottom left corner** and choose **“Connect to Host…”**.
 * Enter your SSH target, for example:
 
   ```
   root@your-vm-ip
   ```
 
-* VS Code may ask you if you **trust the remote machine** – click **Yes**.
-* It will ask **where to store your SSH configuration** – just pick the **first option**.
+* If it asks **where to store your SSH configuration** – just pick the **first option**.
 * Once connected, VS Code will open a **remote window** linked to your virtual machine.
 * It will ask **what operating system the remote machine is** – choose **Linux**.
+* VS Code may ask you if you **trust the remote machine** – click **Yes**.
 * Finally, it will ask for the **password**.
 
 Note: If you prefer the command line or want to quickly check VM access, you can also SSH from your terminal using `ssh root@ip-address`.
@@ -54,10 +54,10 @@ Replace `<date>` with the actual date of your workshop.
 
 This will download all course materials onto your virtual machine.
 
-After cloning, to open the folder in **VS Code**:
+**After cloning**, to open the folder in **VS Code**:
 
 * Click on **"File" → "Open Folder..."**
-* Navigate to the cloned folder (`<date>-mlops-workshops` in your home directory)
+* Navigate to the cloned folder: `/root/<date>-mlops-workshops`
 * Click **"OK"**
 * VS Code may ask you if you **trust the authors** of this folder – just click "Yes"
 
@@ -77,18 +77,18 @@ Here you’ll find a training notebook that we’ll use in the next step.
 
 <img src="../../media/vscode-notebook-demo.png" style="width: 300px" align="right">
 
-Open the notebook file `grocery-store.ipynb` in VS Code and try running the cells.
+Open the notebook file `grocery-store.ipynb` in VS Code and **try running the cells**.
 
 When you try to run a cell, VS Code may prompt you to install recommended extensions like **Python** and **Jupyter**. Go ahead and install them if prompted.
 
-Then, VS Code will ask you to **select a kernel**. Choose:
+Then, VS Code will ask you to **choose a kernel source**. Choose:
 
 ➡️ **Python Environments** → **Create Python Environment**
 
 Follow these steps:
 
 1. **Select `Venv`** – this creates a `.venv` folder in your current workspace.
-2. **Choose the default interpreter** – usually something like **Python 3.11**.
+2. **Choose the `/bin/python3` interpreter** – usually something like **Python 3.11**.
 3. **For dependencies**, select the `requirements.txt` file inside the `01-running-the-notebook` folder.
 4. Click **“OK”**.
 

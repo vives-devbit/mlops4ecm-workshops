@@ -1,13 +1,21 @@
 
 # Building ML Infrastructure and Deploying Production-Ready Models
 
-Welcome to the **ML Infrastructure Workshop** — a hands-on series of labs designed to take you from notebook experimentation to fully automated, production-grade machine learning systems.
+This workshop is part of the "Building ML Infrastructure" course:
 
-Each lab builds on the previous one, gradually introducing real-world tools and practices used in modern MLOps environments.
+- 📚 Read the full [written guide](https://mlops4ecm.be/handleidingen/ml-infrastructure/) with detailed explanations
+- 🎧 Listen to the [podcast episodes](https://mlops4ecm.be/handleidingen/ml-infrastructure/) for an audio companion
+- 📄 Download the [slide deck (PDF)](https://mlops4ecm.be/handleidingen/Building%20ML%20Infrastructure.pdf) for a visual summary
+
+Whether you prefer reading, listening, or watching — we've got you covered.
 
 ## 🧭 Lab Overview
 
 <img src="../media/ml-infrastructure-server-rack-data-center.jpg" style="width: 300px" align="right">
+
+Welcome to the **ML Infrastructure Workshop** — a hands-on series of labs designed to take you from notebook experimentation to fully automated, production-grade machine learning systems.
+
+Each lab builds on the previous one, gradually introducing real-world tools and practices used in modern MLOps environments.
 
 ### Lab 01 – [Running the Notebook](01-running-the-notebook/)
 
