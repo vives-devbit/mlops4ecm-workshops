@@ -79,6 +79,8 @@ Here you’ll find a training notebook that we’ll use in the next step.
 
 Open the notebook file `grocery-store.ipynb` in VS Code and **try running the cells**.
 
+![](../../media/run-all.png)
+
 When you try to run a cell, VS Code may prompt you to install recommended extensions like **Python** and **Jupyter**. Go ahead and install them if prompted.
 
 Then, VS Code will ask you to **choose a kernel source**. Choose:
@@ -94,6 +96,8 @@ Follow these steps:
 
 VS Code will now automatically create a virtual environment and install all required dependencies.
 
+<img src="../../media/installing-packages.png" style="width: 500px">
+
 ### 💡 Note for advanced users
 
 If you prefer to set up the environment manually via the terminal, you can do so:
@@ -108,17 +112,19 @@ Then reopen the notebook and select this virtual environment as your kernel (top
 
 ### Run the notebook
 
-<img src="../../media/grocery-store-milk.jpg" style="width: 300px" align="right">
+<img src="../../media/example-predictions.png" style="width: 300px" align="right">
 
-Once the setup is complete, try running the notebook cells again.
+Once the installation is complete, try running the notebook cells again.
+
+![](../../media/run-all.png)
 
 You should now see:
 
-* A training loop using MobileNetV3.
+* A **training loop** using MobileNetV3.
 * Output showing training loss and validation accuracy.
-* Some example predictions visualized inline.
+* Some **example predictions** visualized inline.
 
-Congratulations! You've just trained and evaluated your first image classifier.
+Congratulations! You've just trained and evaluated an image classifier.
 
 ### See what changed in the notebook
 
@@ -128,11 +134,15 @@ If you haven't already, **save the notebook. CTRL+S**
 
 Using the VS Code interface:
 
+<img src="../../media/vscode-source-control.png" align="right">
+
 1. Click on the **Source Control** icon in the left-hand sidebar (the one that looks like a branch or Y-shape).
-2. You’ll see one or more **pending changes** listed—most notably, `grocery-store.ipynb`.
+2. You’ll see one or more **pending changes** listed — most notably, `grocery-store.ipynb`.
 3. Click on the notebook file in the list to see a **visual diff**.
 
 VS Code will show you what changed inside the notebook:
+
+<img src="../../media/git-diff-notebooks.png" style="width: 300px" align="right">
 
 * Execution counts
 * Metadata like timestamps or kernel info
@@ -140,11 +150,13 @@ VS Code will show you what changed inside the notebook:
 
 Even though you **didn’t change your actual code**, you’ll see a **lot of noise** in the diff. This is a great example of why notebooks are hard to track with Git. In fact, VS Code is already doing you a favour here — it shows a **clean, human-readable view** of the notebook diff.
 
-Behind the scenes, notebooks are saved as **large JSON files**, and things like metadata or image outputs are stored as raw data or base64-encoded blobs. These aren't easy to read or version properly. So while VS Code makes it look manageable, the actual file format is much messier.
+Behind the scenes, notebooks are saved as **large JSON files**. These aren't easy to read or version properly. So while VS Code makes it look manageable, the actual file format is much messier.
 
 ### 🧠 Viewing the Raw Notebook Diff
 
 Now open a **terminal**. To see what the notebook file really looks like under the hood, run:
+
+<img src="../../media/git-diff-images.png" style="width: 300px" align="right">
 
 ```bash
 git diff
@@ -153,7 +165,7 @@ git diff
 - Press the key "d" a few times to go **down** in the diff.
 - Press the key "q" to **quit** the diff.
 
-This shows the raw contents of the `.ipynb` file — which includes not just your code, but all kinds of metadata, and even full image outputs as base64 strings. It’s verbose and often unreadable.
+This shows the raw contents of the `.ipynb` file — which includes not just your code, but all kinds of metadata, and even full image outputs as **base64** strings. It’s verbose and often unreadable.
 
 This reinforces why we’ll soon move from notebooks to Python scripts: plain `.py` files produce much cleaner diffs, are easier to version, and don’t clutter your Git history with unrelated noise.
 
@@ -164,11 +176,10 @@ This reinforces why we’ll soon move from notebooks to Python scripts: plain `.
 If you want a more readable diff for notebooks on the command line, try using `nbdime`:
 
 ```bash
+source .venv/bin/activate
 pip install nbdime
+nbdime config-git --enable
+git diff
 ```
 
 For more information, visit the documentation: [https://nbdime.readthedocs.io](https://nbdime.readthedocs.io)
-
-### ✅ Next Step
-
-Once you've successfully run the notebook, you're ready to move on to the next exercise: **refactoring the notebook into reusable Python scripts.**

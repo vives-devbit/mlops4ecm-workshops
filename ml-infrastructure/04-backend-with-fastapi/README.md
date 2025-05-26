@@ -23,12 +23,14 @@ We’ve already provided a `backend.py` file inside this folder. Let’s run it.
 In the terminal, begin by installing `fastapi`:
 
 ```bash
+.venv/bin/activate
 pip install fastapi[standard]
 ```
 
 Once installed you need to provide your own `data_utils.py`, `model_utils.py` and `model.pth` files. Then run:
 
 ```bash
+cd ml-infrastructure/04-backend-with-fastapi
 fastapi dev backend.py --host 0.0.0.0
 ```
 

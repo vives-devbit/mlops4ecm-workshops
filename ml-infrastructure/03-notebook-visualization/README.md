@@ -18,21 +18,20 @@ These notebooks:
 * Use your **Python modules** to load data and models
 * Focus on interactive, exploratory **analysis**
 
-By keeping notebooks small and focused, you make your project easier to debug, extend, and understand — even for future collaborators.
+By keeping notebooks **small and focused**, you make your project easier to debug and extend.
 
 ```
-├── dataset_analysis.ipynb
-├── prediction_gallery.ipynb
-└── confusion_matrix.ipynb
+├── 03-notebook-visualization/dataset_analysis.ipynb
+└── 03-notebook-visualization/prediction_gallery.ipynb
 ```
 
 Each notebook has a single goal. You can keep adding more notebooks later — thanks to your modular codebase, it’s easy.
 
 ### 🍓 Notebook 1 – `dataset_analysis.ipynb`
 
-> Explore the training data distribution. Are some classes over- or under-represented?
+<img src="../../media/class-imbalance.png" style="width: 300px" align="right">
 
-Use this notebook to inspect your dataset’s structure and class imbalance. Look at:
+Use this notebook to inspect your dataset’s structure and **class imbalance**. Look at:
 
 * Number of images per class (bar plot)
 
@@ -52,7 +51,7 @@ Steps:
 
 ### 🤖 Notebook 2 – `prediction_gallery.ipynb`
 
-> Build a lightweight prediction tool using **Gradio** for interactive exploration.
+<img src="../../media/gradio-demo.png" style="width: 300px" align="right">
 
 Use the [Gradio](https://gradio.app/) library to create a UI that lets you:
 
@@ -65,35 +64,6 @@ This notebook creates a **mini demo** of your model — useful for presentations
 Steps:
 
 * Install Gradio: `pip install gradio`
-* Load your saved model and data loader
-* Create a UI with dropdowns, buttons, and image previews
-* Launch it inside the notebook (or in your browser)
-
-### 🎁 Bonus Exercise
-
-#### 📊 Notebook 3 – `confusion_matrix.ipynb` (Optional)
-
-> Visualize how your model performs across different classes. Which categories does it confuse?
-
-Use `sklearn.metrics.confusion_matrix` to generate a matrix comparing **true vs. predicted labels**. Then use `matplotlib` or `seaborn` to visualize the result.
-
-This will help you identify weak spots in your model. For example:
-
-* Does it confuse apples with kiwis?
-* Are dairy products harder to classify than fruit?
-
-Steps:
-
-* Load your saved model (`model.pt`) from disk
-* Run inference on the full validation set
-* Collect predicted and true labels
-* Visualize the confusion matrix
-
-### 🧠 Key Takeaways
-
-* Keep notebooks short and focused on one goal
-* Load models and data from utility modules
-* Use Python scripts for training — use notebooks for insight
-* Use visual tools (like interactive UIs) to spot problems early
-
-These notebooks are **useful, shareable, and explainable** — perfect for internal demos, team handoffs, or debugging sessions.
+* Load your model and data loader
+* Fix the TODO in the code (IP address)
+* Try the demo inside the notebook (or in your browser)

@@ -58,7 +58,7 @@ Make sure the `/predict` and `/random-image` endpoints are available.
 Now go to the folder for this lab and run:
 
 ```bash
-python frontend.py
+python3 frontend.py
 ```
 
 You’ll see output like:
