@@ -91,3 +91,26 @@ docker ps                   # Show currently running containers
 ```
 
 > 🔁 If you make code changes, use `docker compose up --build` to rebuild the images.
+
+### 🔁 Test Automatic Service Recovery
+
+In real-world production, servers **reboot** — due to maintenance, crashes, or hardware updates. Your services need to come back online **automatically**.
+
+That’s what this line in `docker-compose.yml` does:
+
+```yaml
+restart: always
+```
+
+Let’s test that behavior:
+
+```bash
+sudo reboot
+```
+
+After the VM restarts (wait a few seconds), visit the same URLs again:
+
+* `http://<production-vm-ip>:8050`
+* `http://<production-vm-ip>:8000/docs`
+
+You should find that everything comes back online **without any manual intervention**.
