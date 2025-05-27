@@ -55,10 +55,6 @@ Move your training dataset to S3 and modify your code to load it from object sto
 
 Add continuous integration (CI) checks to your project using GitHub Actions. Automatically test your code and check formatting every time someone opens a pull request.
 
-### Lab 10 – [Automatic Deployment](10-automatic-deployment/)
-
-Install a self-hosted GitHub Actions runner on your VM. Configure a workflow to automatically deploy your app with Docker Compose on every push to `main`.
-
 ## 🚀 Goal of the Workshop
 
 By the end of these labs, you'll have built a real, end-to-end machine learning system that can:
