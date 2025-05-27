@@ -19,8 +19,8 @@ In this folder, you'll find three key files:
 
 | File                 | Purpose                                       |
 | -------------------- | --------------------------------------------- |
-| `data_utils.py`      | A helper module for loading your dataset      |
-| `test_dataloader.py` | A basic unit test for your data loading code  |
+| `data_utils.py`      | A (fake) helper module for loading your dataset      |
+| `test_dataloader.py` | A (fake) unit test for your data loading code  |
 | `checks.yml`         | A GitHub Actions workflow that runs CI checks |
 
 Your job is to wire this all together so GitHub can run tests and formatting checks **automatically on every PR**.
@@ -120,8 +120,8 @@ You’ll be able to break things, test changes, and reset without affecting othe
 Now switch to your virtual machine and clone the empty repo:
 
 ```bash
+cd ~  # change to home directory
 git clone https://github.com/YOUR_USERNAME/lab9-checks.git
-cd lab9-checks
 ```
 
 This gives you a local folder tied to your GitHub repo.
@@ -131,13 +131,14 @@ This gives you a local folder tied to your GitHub repo.
 From the course materials (this lab folder), copy the files into your new repo:
 
 ```bash
-cp ../09-pull-request-checks/*.py .
-cp ../09-pull-request-checks/checks.yml .
+cp 09-pull-request-checks/*.py ~/lab9-checks/
+cp 09-pull-request-checks/checks.yml ~/lab9-checks/
 ```
 
 Now create the folder GitHub uses for workflows:
 
 ```bash
+cd ~/lab9-checks/
 mkdir -p .github/workflows
 mv checks.yml .github/workflows/
 ```
@@ -168,8 +169,8 @@ Here’s how to create one:
    * **Expiration**: 30 days is fine
    * **Repository access**: Choose **“Only select repositories”**, then pick your new repo
    * Under **Permissions**, set:
-     * ✅ `Contents`: **Read and write**
-     * ✅ `Workflows`: **Read and write**
+     * ✅ `Contents`: **Read and write** (This allows updating files.)
+     * ✅ `Workflows`: **Read and write** (This allows changing workflows.)
 4. Click **Generate token**
 5. Copy the token — you won’t be able to see it again later.
 
@@ -184,7 +185,15 @@ If you want Git to **remember it**, you can run:
 git config --global credential.helper store
 ```
 
-This saves the token in a local file so you don’t have to paste it every time (acceptable for a training VM or personal environment).
+This saves the token **unencrypted** in a **local file** so you don’t have to paste it every time. Acceptable only for a training VM or personal environment. Although the token has very **restricted permissions** (only this repo) so the danger is quite small.
+
+Try **updating the branch** again. Git will ask you for a username and password.
+
+```bash
+git push -u origin main
+
+# git should ask password
+```
 
 #### 🎉 What Happens Now?
 
@@ -332,15 +341,3 @@ Try opening a pull request from a branch with failing formatting or broken tests
 * Only after fixing the issues and pushing again will the PR become mergeable ✅
 
 This gives you safety, speed, and confidence — the foundations of a mature engineering workflow.
-
-### ✅ Summary
-
-By the end of this lab, you:
-
-* Understood what GitHub Actions are and how they work
-* Set up a workflow to run **unit tests and formatting checks**
-* Triggered the workflow manually and via pull requests
-* Saw failing and passing runs in action
-* Enabled branch protection to enforce quality
-
-This is your first taste of **real CI/CD workflows** — and it sets the foundation for automation, safety, and collaboration in all future ML projects.
