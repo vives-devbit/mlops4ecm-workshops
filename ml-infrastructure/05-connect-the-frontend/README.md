@@ -26,13 +26,8 @@ The frontend is a simple Python script using **Plotly Dash**, which runs a small
 If you haven’t installed Dash yet, run this inside your virtual environment:
 
 ```bash
+source .venv/bin/activate
 pip install dash
-```
-
-The script also uses `requests` and `Pillow`, which you likely have already, but if not:
-
-```bash
-pip install requests pillow
 ```
 
 #### ✅ 2. Make sure your backend is running
@@ -55,9 +50,11 @@ Make sure the `/predict` and `/random-image` endpoints are available.
 
 #### ✅ 3. Run the frontend
 
-Now go to the folder for this lab and run:
+Now open a second terminal and run the frontend:
 
 ```bash
+source .venv/bin/activate
+cd ml-infrastructure/05-connect-the-frontend/
 python3 frontend.py
 ```
 
@@ -82,7 +79,9 @@ You’ll see a simple web interface with a single button: **"Predict random imag
 
 Try clicking it.
 
-❌ You should get an error. Why? Because the function that fetches a random image from the backend hasn’t been implemented yet.
+❌ You should get an error. Why?
+
+Because the function that fetches a random image from the backend **hasn’t been implemented** yet.
 
 The frontend is looking for an image from:
 
@@ -122,6 +121,8 @@ Use this pattern to complete the `get_random_image()` function.
 
 ### ✅ Step 4 – Test It
 
+<img src="../../media/grocery-image-classifier.png" style="width: 300px" align="right">
+
 Once you've implemented the request:
 
 * Restart your `frontend.py` script,
@@ -135,33 +136,8 @@ If it works, you’ll see:
 
 🎉 That means your frontend and backend are successfully talking to each other!
 
-### 🧪 Bonus Exercises
+### 🛑 Stop Frontend and Backend
 
-Want to go further? Here are a few ideas you can try:
+Before moving on to the next exercise, it's best to **stop both frontend and backend**.
 
-#### 🎨 Improve the layout
-
-Try customizing the layout or styling with Dash:
-
-* Add some more text
-* Center the image
-* Change fonts or colors
-
-#### 📊 Add Prediction Confidence
-
-Update your backend to return **not just the class label**, but also a **confidence score** — the model's softmax probability for its top prediction.
-
-In the frontend, display this score below the prediction, like:
-
-> **Prediction:** milk (94.2%)
-
-This helps users understand **how confident** the model is — especially useful when debugging or analyzing edge cases.
-
-### 📦 Summary
-
-* You now have a working **frontend** for your ML API.
-* You learned how to use Dash to build simple web apps in Python.
-* You used the `requests` library to connect frontend and backend.
-* Your project now includes a full **user-facing interface** — not just code!
-
-In the next lab, we'll package both frontend and backend into containers so you can **deploy them together**.
+You do this in the terminal with **CTRL + C**.

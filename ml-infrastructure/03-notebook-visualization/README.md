@@ -64,6 +64,5 @@ This notebook creates a **mini demo** of your model — useful for presentations
 Steps:
 
 * Install Gradio: `pip install gradio`
-* Load your model and data loader
 * Fix the TODO in the code (IP address)
 * Try the demo inside the notebook (or in your browser)

@@ -30,11 +30,7 @@ def get_class_names():
 
 @app.get("/random-image")
 def get_random_image():
-    """✅ Return a random image from the validation set."""
-    # Step 1: Pick a random index from val_dataset
-    # Step 2: Get the PIL image at that index (val_dataset[index])
-    # Step 3: Save it to a BytesIO buffer as JPEG
-
+    """Return a random image from the validation set."""
     index = random.randint(0, len(val_dataset) - 1)
     image, _ = val_dataset[index]  # This is a PIL.Image
 

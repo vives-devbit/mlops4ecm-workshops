@@ -12,22 +12,22 @@ You’ll build an API with three endpoints:
 2. `GET /random-image` – return a random sample image from the dataset
 3. `POST /predict` – accept an image and return the model’s prediction
 
-The third endpoint is already implemented for you. Your job is to complete the first two.
+Your job is to complete `/class-names`. The endpoints `/random-image` and `/predict` are already implemented for you.
 
 ### 🧭 Step 1 – Start the FastAPI Backend
 
-We’ve already provided a `backend.py` file inside this folder. Let’s run it.
+We’ve already provided a `backend.py` file inside this folder. **Let’s run it!**
 
 #### ✅ Start the FastAPI dev server
 
 In the terminal, begin by installing `fastapi`:
 
 ```bash
-.venv/bin/activate
+source .venv/bin/activate
 pip install fastapi[standard]
 ```
 
-Once installed you need to provide your own `data_utils.py`, `model_utils.py` and `model.pth` files. Then run:
+Once installed, run the fastapi server with:
 
 ```bash
 cd ml-infrastructure/04-backend-with-fastapi
@@ -52,6 +52,8 @@ INFO   Application startup complete.
 
 ### 🌐 Step 2 – Open the Swagger UI
 
+<img src="../../media/grocery-swagger-ui.png" style="width: 300px" align="right">
+
 Open your browser and go to:
 
 ```
@@ -66,15 +68,17 @@ You should see three endpoints:
 * `GET /random-image`
 * `POST /predict`
 
-Try clicking **“Try it out”** on `GET /class-names` — you’ll see it doesn’t work yet. That’s expected.
+<img src="../../media/try-it-out.png" align="right">
+
+Open `GET /class-names`, press **"Try it out**" and select **"Execute"**
+
+You’ll see it doesn’t work yet. The **"Response body"** is `null`.
 
 Let’s fix that.
 
-### 🛠️ Step 3 – Complete the TODOs
+### 🛠️ Step 3 – Implement `/class-names`
 
-Open the `backend.py` file. You’ll find two `TODO` comments for the endpoints you need to finish.
-
-#### ✅ 1. Implement `/class-names`
+Open the `backend.py` file. You’ll find a `TODO` for the endpoint you need to finish.
 
 This endpoint should return a list of the model's class labels.
 
@@ -92,18 +96,7 @@ You need to return a JSON response like this:
 { "classes": ["apple", "banana", "milk"] }
 ```
 
-#### ✅ 2. Implement `/random-image`
-
-This endpoint should return a **random image from the validation set**.
-
-Steps:
-
-1. Pick a random index from the `val_dataset`
-2. Get the corresponding image (a `PIL.Image`) — use `val_dataset[index]`
-3. Save it to an in-memory `BytesIO` buffer as JPEG
-4. Return it using `StreamingResponse`
-
-The code is almost done for you — you just need to insert the part where the image is selected.
+When you have fixed the code, **verify that `GET /class-names` works** through Swagger UI.
 
 ### 🤖 Step 4 – Run a Prediction
 
@@ -111,10 +104,8 @@ The `POST /predict` endpoint is already complete.
 
 In Swagger UI:
 
-1. Click `POST /predict`
-2. Click **“Try it out”**
-3. Upload a sample image from the dataset (e.g. a `.jpg`)
-4. Click **“Execute”**
+- Get a **sample image** from the `GET /random-image` API.
+- Save it to disk and then upload it to `POST /predict`.
 
 You should see a response like:
 
@@ -123,12 +114,3 @@ You should see a response like:
 ```
 
 Behind the scenes, the image is passed to the model, which returns the predicted class label.
-
-### 🧠 Key Takeaways
-
-* You now have a **fully working ML backend** that serves predictions over HTTP.
-* You explored your API using **Swagger UI**, a built-in interface provided by FastAPI.
-* You wrote two useful endpoints: one to list class names, and one to return a random image.
-
-✅ In the next lab, we’ll hook this backend up to a **Dash frontend** — so users can interact with your model in the browser.
-

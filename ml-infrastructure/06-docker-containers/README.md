@@ -16,32 +16,17 @@ No more "it works on my machine." Once this is done, it’ll work anywhere.
 06-docker-containers/
 ├── backend/
 │   ├── Dockerfile         # Pre-filled, just fix CMD
-│   ├── requirements.txt   # Already complete
-│   └── ❗ Your code files: backend.py, model_utils.py, data_utils.py, model.pth
+│   └── requirements.txt   # Already complete
 ├── frontend/
 │   ├── Dockerfile         # Pre-filled, just fix CMD
-│   ├── requirements.txt   # Already complete
-│   └── ❗ Your code file: frontend.py
+│   └── requirements.txt   # Already complete
 ```
 
-✅ You will **not** write the Dockerfiles or requirements files from scratch — they are already provided.
-🛠️ You **will** fix the `CMD` at the bottom of each Dockerfile and **copy your own Python files** into the correct subfolders.
+✅ You don't have to write the Dockerfiles from scratch.
 
-### ✅ Step 1 – Copy in your application code
+🛠️ You will simply fix the `CMD` at the bottom of each Dockerfile.
 
-Copy the following files into the right locations:
-
-| File             | Where to put it                  |
-| ---------------- | -------------------------------- |
-| `backend.py`     | `06-docker-containers/backend/`  |
-| `model_utils.py` | `06-docker-containers/backend/`  |
-| `data_utils.py`  | `06-docker-containers/backend/`  |
-| `model.pth`      | `06-docker-containers/backend/`  |
-| `frontend.py`    | `06-docker-containers/frontend/` |
-
-You should now have all required code inside the `backend/` and `frontend/` folders.
-
-### ✅ Step 2 – Fix the backend Dockerfile
+### ✅ Step 1 – Fix the backend Dockerfile
 
 Open `backend/Dockerfile` and scroll to the bottom.
 
@@ -53,21 +38,23 @@ CMD ["???"]
 
 With the correct command to run the FastAPI backend.
 
-### ✅ Step 3 – Build and run the backend
+### ✅ Step 2 – Build and run the backend
 
 In your terminal, build and run the backend container:
 
 ```bash
-cd backend
+cd ml-infrastructure/06-docker-containers/backend/
 docker build -t grocery-backend .
 docker run -d --name backend -p 8000:8000 grocery-backend
 ```
 
 Here’s what each command does:
 
-* `cd backend`: navigates into the backend folder where your Dockerfile lives.
+* `cd backend/`: navigates into the backend folder where your Dockerfile lives.
 * `docker build -t grocery-backend .`: builds a Docker image from the current directory and tags it as `grocery-backend`.
-* `docker run -d --name backend -p 8000:8000 grocery-backend`: runs the container in detached mode (`-d`), names it `backend`, and maps port 8000 of your virtual machine to port 8000 of the container.
+* `docker run -d --name backend -p 8000:8000 grocery-backend`:
+    - Runs the container in detached mode (`-d`), names it `backend`,
+    - and maps port 8000 of your virtual machine to port 8000 of the container.
 
 Now open your browser and go to:
 
@@ -89,7 +76,7 @@ This will show a list of all active containers. You should see a row for `grocer
 
 If nothing shows up, it likely means your container failed to start. Run `docker logs backend` to see the output and diagnose the issue.
 
-### ✅ Step 4 – Fix the frontend Dockerfile
+### ✅ Step 3 – Fix the frontend Dockerfile
 
 Open `frontend/Dockerfile` and scroll to the bottom.
 
@@ -101,12 +88,12 @@ CMD ["???"]
 
 With the correct command to run the frontend application.
 
-### ✅ Step 5 – Build and run the frontend (attempt 1)
+### ✅ Step 4 – Build and run the frontend (attempt 1)
 
 In your terminal:
 
 ```bash
-cd frontend
+cd ml-infrastructure/06-docker-containers/frontend/
 docker build -t grocery-frontend .
 docker run -d --name frontend -p 8050:8050 grocery-frontend
 ```
@@ -120,9 +107,10 @@ http://<your-vm-ip>:8050
 Click the **"Predict random image"** button.
 
 🧱 **Oops!**
-It doesn’t work. The frontend can’t connect to the backend — because each container runs in isolation by default.
 
-### 🚧 Step 6 – Fixing Frontend–Backend Communication
+It doesn’t work. The frontend can’t connect to the backend — because **each container runs in isolation** by default.
+
+### 🚧 Step 5 – Fixing Frontend–Backend Communication
 
 You’ve now built and launched both containers — but when you open the frontend and click **“Predict random image”**, ❌ it **fails**.
 
@@ -138,7 +126,7 @@ tries to reach **itself**, not the backend.
 
 To fix this, we need to do **two things**:
 
-### ✅ Step 6.1 – Update the Frontend Code
+### ✅ Step 5.1 – Update the Frontend Code
 
 The **backend is running in a separate container**, and Docker gives containers predictable names that can be used as **hostnames**.
 
@@ -150,7 +138,7 @@ API_URL = "http://backend:8000"
 
 This tells the frontend to connect to a host named `backend` — which will work **as long as both containers are in the same Docker network** (which we’ll set up next).
 
-### ✅ Step 6.2 – Create a Shared Docker Network
+### ✅ Step 5.2 – Create a Shared Docker Network
 
 Docker provides named **user-defined networks** where containers can talk to each other by name.
 
@@ -160,7 +148,7 @@ Create one with:
 docker network create grocery-net
 ```
 
-### ✅ Step 6.3 – Remove Old Containers
+### ✅ Step 5.3 – Remove Old Containers
 
 Remove the previously launched containers so we can start fresh in the correct network:
 
@@ -168,16 +156,16 @@ Remove the previously launched containers so we can start fresh in the correct n
 docker rm -f backend frontend
 ```
 
-### ✅ Step 6.4 – Rebuild the Frontend (after code change)
+### ✅ Step 5.4 – Rebuild the Frontend (after code change)
 
 Since you edited `frontend.py`, rebuild the frontend image:
 
 ```bash
-cd frontend
+cd frontend/
 docker build -t grocery-frontend .
 ```
 
-### ✅ Step 6.5 – Run Both Containers in the Network
+### ✅ Step 5.5 – Run Both Containers in the Network
 
 Now relaunch both containers using the same Docker network:
 
@@ -186,7 +174,7 @@ docker run -d --name backend --network grocery-net -p 8000:8000 grocery-backend
 docker run -d --name frontend --network grocery-net -p 8050:8050 grocery-frontend
 ```
 
-### ✅ Step 6.6 – Test It
+### ✅ Step 5.6 – Test It
 
 Visit your frontend in the browser again:
 
@@ -215,13 +203,3 @@ docker ps
 ```
 
 This should now return **an empty list**, meaning no containers are currently running.
-
-### 🎉 Done!
-
-You now have:
-
-* A backend container running a FastAPI model server
-* A frontend container running a Dash app
-* Both containers talking to each other over a shared Docker network
-
-In the next lab, you’ll simplify this setup using **Docker Compose**.
