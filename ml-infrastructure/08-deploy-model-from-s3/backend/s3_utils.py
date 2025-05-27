@@ -33,15 +33,10 @@ def upload_to_s3(file_path):
 
     print(f"✅ Uploaded {file_path} => s3://{bucket}/{object_name}")
 
-
 def download_from_s3(file_path):
     """Download a file from S3-compatible storage using boto3."""
     bucket = MINIO_BUCKET
     object_name = file_path
     s3 = create_s3_client()
-
-    # ❗ TODO: Download the file from the S3 bucket
-    raise NotImplementedError("download_from_s3() is not implemented yet.")
-
+    s3.download_file(bucket, object_name, file_path)
     print(f"✅ Downloaded s3://{bucket}/{object_name} => {file_path}")
-

@@ -2,6 +2,7 @@ from fastapi import FastAPI, File, UploadFile
 from fastapi.responses import JSONResponse, StreamingResponse
 from data_utils import get_classes, GroceryDataset, VAL_CSV, transform
 from model_utils import load_model, DEVICE
+from s3_utils import download_from_s3
 import torch
 import random
 from io import BytesIO
@@ -13,6 +14,7 @@ app = FastAPI(title="Grocery Classifier API")
 class_names = get_classes()
 
 # TODO download model from S3
+# -> see download_from_s3()
 
 model = load_model(num_classes=len(class_names))
 model.eval()

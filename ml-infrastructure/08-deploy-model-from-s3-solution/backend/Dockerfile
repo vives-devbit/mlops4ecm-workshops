@@ -14,6 +14,9 @@ RUN pip install --no-cache-dir -r requirements.txt
 # Copy all app code into the container
 COPY . .
 
+# Don't store any models, they must come from S3
+RUN rm -f *.pth
+
 # Document the port used by backend
 EXPOSE 8000
 

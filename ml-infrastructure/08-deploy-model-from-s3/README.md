@@ -17,7 +17,6 @@ You’ll be given working infrastructure and code templates — your task is to 
 | 1        | Set up the MinIO server    | Create your `.env` file, start MinIO, create a bucket        |
 | 2        | Upload the model to S3     | Complete the `upload_to_s3` and `download_from_s3` helpers   |
 | 3        | Serve model from S3        | Add model download logic to `backend.py`                     |
-| 🕒 Bonus | Timestamped model versions | Use the current datetime to version model files in S3        |
 | 🔁 Bonus | Auto-reload new models     | Implement model polling to detect when the model changes    |
 
 ### 🔧 Step 1 – Set Up the MinIO Server
@@ -34,7 +33,7 @@ We store these values in a file named `.env` — but this file is **not included
 - ✅ It’s **best practice** not to commit these files to version control — especially in team projects or public repositories.
 - Instead, your project includes a **template** file named `.env.example`. You’ll copy that and create your own private version.
 
-Inside the project folder, run:
+Inside the `08-deploy-model-from-s3/` folder, run:
 
 ```bash
 cp .env.example .env
@@ -60,7 +59,7 @@ To start MinIO, we’ll use Docker Compose — but since our file is named somet
 Run:
 
 ```bash
-docker compose -f compose-minio.yml up -d
+docker compose -f compose-minio.yml up -d --build
 ```
 
 If everything works correctly, Docker will spin up a MinIO container and print something like:
@@ -69,6 +68,13 @@ If everything works correctly, Docker will spin up a MinIO container and print s
 [+] Running 2/2
  ✔ Network 08-deploy-model-from-s3_default     Created
  ✔ Container 08-deploy-model-from-s3-minio-1   Started
+```
+
+Just **for your information**, the command to take it back down is:
+```bash
+# This takes the minio server back down
+docker compose -f compose-minio.yml down
+# Don't run this now, just for your information
 ```
 
 #### ✅ 3. Visit the MinIO Web UI
@@ -93,10 +99,9 @@ Once logged in:
 
 To confirm that everything works:
 
-1. Click on **"Object Browser"** in the left menu.
-2. Select your bucket and click **"Upload"**.
-3. Choose a simple file (e.g. a `.txt` or `.jpg`) from your computer.
-4. Click **"Upload"** to send it to the bucket.
+1. Select your bucket and click **"Upload"**.
+2. Choose a simple file (e.g. a `.txt` or `.jpg`) from your computer.
+3. Click **"Upload"** to send it to the bucket.
 
 If you see the file in the bucket, your MinIO server is working correctly — and you're ready to move on to uploading your trained models.
 
@@ -104,51 +109,49 @@ If you see the file in the bucket, your MinIO server is working correctly — an
 
 Your training script is already set up to call an `upload_to_s3()` function — but that function needs to be implemented.
 
-1. Open `s3_utils.py` and fix the `upload_to_s3()` function. [Documentation](https://boto3.amazonaws.com/v1/documentation/api/latest/guide/s3-uploading-files.html)
-2. (Needed later) Also implement `download_from_s3()` while you're in there. [Documentation](https://boto3.amazonaws.com/v1/documentation/api/latest/reference/services/s3/client/download_file.html)
-3. Run the training script:
-
-   ```bash
-   python run_training.py
+1. Open `backend/s3_utils.py` and fix the `upload_to_s3()` function. [Documentation](https://boto3.amazonaws.com/v1/documentation/api/latest/guide/s3-uploading-files.html)
+2. Open the `run_training.py` script and notice this at the top (loads the .env file):
+   ```python
+   # Load environment variables from .env
+   from dotenv import load_dotenv
+   load_dotenv()
    ```
-4. After training, check the MinIO web UI to verify that the model file appeared in your bucket.
+3. Install the `dotenv` library:
+   ```bash
+   source .venv/bin/activate
+   pip install dotenv
+   ```
+4. Run the training script:
+   ```bash
+   python3 run_training.py
+   ```
+5. After training, check the **MinIO web UI** to verify that the model file appeared in your bucket.
 
 ### 📥 Step 3 – Download the Model in the Backend
 
 Now that your model is stored in MinIO, the backend needs to download it at startup.
 
-1. In `backend.py`, locate the TODO for downloading the model from S3.
+1. In `backend/backend.py`, locate the TODO for downloading the model from S3.
 2. Add the line to call your `download_from_s3()` function.
 3. Start the backend using Docker Compose:
 
    ```bash
    docker compose -f compose-app.yml up --build
    ```
-4. Visit your frontend at `http://<vm-ip>:8050` and verify that predictions still work.
+4. Visit your frontend at `http://<vm-ip>:8050` and verify that predictions work.
 
-If they do — your model was loaded from object storage successfully!
-
-### ⏱️ Bonus Exercise: Timestamped Model Versions
-
-Update your training script to:
-
-* Save the model using a datetime-based filename, e.g. `model-20240522-1430.pt`.
-* Upload it to S3 with that name.
-* Optionally modify the backend to always load the **most recent** version by sorting filenames.
-
-This is your first step toward real **model versioning**.
+If they do — your model was **loaded from object storage** successfully!
 
 ### 🌟 Bonus Exercise: Auto-Redeploy New Models
 
 Add logic to **periodically check** for a newer model version in your MinIO bucket.
 
-* Use `boto3` to list objects in the bucket.
-* Compare timestamps or filenames.
+* Use `boto3` to get 'LastModified' of your model
 * Reload the model if a newer one appears.
 * Optionally run this check in a background thread.
 
-### ✅ Wrapping Up
+```
+response = s3.head_object(Bucket=, Key=)
 
-You’ve now connected model training and **deployment through S3** — a key pattern in real-world MLOps. By uploading models to object storage and loading them from there in production, you decouple the training pipeline from the serving system.
-
-This lays the groundwork for automation, versioning, and **scalable deployment**.
+last_modified = response['LastModified']
+```
