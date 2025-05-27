@@ -18,6 +18,5 @@ COPY . .
 EXPOSE 8000
 
 # Run FastAPI server (with 'run' for production server)
+CMD ["fastapi", "run", "backend.py", "--host", "0.0.0.0"]
 
-# TODO: Replace this with the right command
-CMD ["???"]

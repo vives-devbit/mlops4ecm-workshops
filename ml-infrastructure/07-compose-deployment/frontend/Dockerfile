@@ -13,6 +13,5 @@ COPY . .
 EXPOSE 8050
 
 # Start the Dash application
+CMD ["python", "frontend.py"]
 
-# TODO: Replace this with the right command
-CMD ["???"]
