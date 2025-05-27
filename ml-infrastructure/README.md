@@ -45,7 +45,7 @@ Package both the backend and frontend into Docker containers to ensure reproduci
 
 ### Lab 07 – [Compose Deployment](07-compose-deployment/)
 
-Use Docker Compose to launch your entire application stack (API + frontend) with a single command. Deploy your application to a production environment via GitHub or a Docker registry.
+Use Docker Compose to launch your entire application stack (API + frontend) with a single command.
 
 ### Lab 08 – [Deploy Model from S3](08-deploy-model-from-s3/)
 
