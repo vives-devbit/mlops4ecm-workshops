@@ -110,7 +110,7 @@ sudo reboot
 
 After the VM restarts (wait a few seconds), visit the same URLs again:
 
-* `http://<production-vm-ip>:8050`
-* `http://<production-vm-ip>:8000/docs`
+* `http://<your-vm-ip>:8050`
+* `http://<your-vm-ip>:8000/docs`
 
 You should find that everything comes back online **without any manual intervention**.
