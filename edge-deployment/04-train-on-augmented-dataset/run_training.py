@@ -10,11 +10,12 @@ def main():
     parser.add_argument("--epochs", type=int, default=5)
     parser.add_argument("--learning-rate", type=float, default=1e-3)
     parser.add_argument("--output", type=str, default="model.pth")
+    parser.add_argument("--with-synthetic", action="store_true", help="Include synthetic data in training set")
     args = parser.parse_args()
 
     # Load data
     classes = get_classes()
-    train_loader, val_loader = get_loaders(args.batch_size)
+    train_loader, val_loader = get_loaders(batch_size=args.batch_size, include_synthetic=args.with_synthetic)
 
     # Create model
     model = create_model(len(classes))
