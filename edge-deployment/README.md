@@ -7,7 +7,7 @@ This workshop is part of the **"Edge AI Deployment"** course:
 - 🎧 Listen to the [podcast series](https://mlops4ecm.be/handleidingen/edge-deployment/) for audio insight
 - 📄 Download the [slide deck (PDF)](https://mlops4ecm.be/handleidingen/Edge%20AI%20Deployment.pdf) for a visual overview
 
-Whether you're here to learn by coding, watching, or listening — you're covered.
+Whether you're here to learn by coding, reading, or listening — you're covered.
 
 ## 🧭 Lab Overview
 
@@ -42,6 +42,10 @@ Export your model to ONNX, run it on the ROCK 5B using ONNX Runtime, and apply q
 ### Lab 06 – [Distill a Smaller Model](06-knowledge-distillation/)
 
 Train a small model (MobileNet) using outputs from a larger teacher model (e.g. ResNet). Learn how knowledge distillation can compress models while retaining performance — ideal for edge deployment.
+
+### Lab 07 – Validate Synthetic Data with CLIP Embeddings
+
+Use CLIP image embeddings to visually compare your real training dataset with the synthetic data. This lab helps you assess the quality of your synthetic images by analyzing how closely they align with the original data in embedding space.
 
 ## 🚀 Goal of the Workshop
 

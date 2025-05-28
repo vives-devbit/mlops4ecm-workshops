@@ -1,17 +1,17 @@
-# 🧪 Lab 01 – First Steps with OLAMA
+## 🧪 Lab 01 – First Steps with OLAMA
 
 > Run your first LLM and vision models on a ROCK 5B embedded device. Then compare to GPU inference on a server. Discover the limits of local AI execution and get familiar with prompt-based interactions.
 
-## 🎯 Objectives
+### 🎯 Objectives
 
 - Run a large language model (LLM) on an embedded device (ROCK 5B)
 - Interact with a vision-capable LLM
 - Benchmark performance: CPU vs GPU
 - Explore model selection on the Ollama platform
 
-## 🖥️ Setup on the ROCK 5B
+### 🖥️ Setup on the ROCK 5B
 
-### 🔌 Step 1 – SSH into the Device
+### 🔌 SSH into the Device
 
 Each ROCK 5B is accessible on the network. Use the label on the device to find its IP:
 
@@ -20,21 +20,23 @@ ssh radxa@10.26.3.XX
 # password: radxa
 ````
 
-### ⚙️ Step 2 – Install Ollama
+### ⚙️ Install Ollama
 
 ```bash
 curl -fsSL https://ollama.com/install.sh | sh
 ```
 
-This will:
+This will install `Ollama`, which is a way of running large language models efficiently on all kinds of devices, including our Linux board.
 
-* Create system groups and a user
-* Enable the `ollama` systemd service
-* Start the local API on port `11434`
+* Installs `Ollama` software and CLI
+* Enables the `ollama` systemd service
+* Starts the local API on port `11434`
 
-The service starts automatically, so no need to run `ollama serve`.
+### 🤖 Run Your First Model
 
-### 🤖 Step 3 – Run Your First Model
+Gemma 3 is a really interesting model for LLMs on edge devices:
+
+https://blog.google/technology/developers/gemma-3/
 
 Pull and run a small text model to test the setup:
 
@@ -49,7 +51,7 @@ Try a basic prompt:
 > What is an orange?
 ```
 
-### 🧪 Step 4 – Benchmark with `--verbose`
+### 🧪 Benchmark with `--verbose`
 
 ```bash
 ollama run gemma3:1b --verbose
@@ -68,7 +70,7 @@ prompt eval rate:     20.62 tokens/s
 eval rate:            13.67 tokens/s
 ```
 
-### 📦 Step 5 – Try a Larger Model
+### 📦 Try a Larger Model
 
 Now try the 4B model:
 
@@ -83,7 +85,23 @@ Observe the performance drop:
 eval rate: 5.95 tokens/s (much slower)
 ```
 
-## 🖼️ Step 6 – Run Vision Inference (Apple Image)
+### 🔍 Explore Ollama Models
+
+Visit [https://ollama.com](https://ollama.com)
+
+Browse the models available — look for:
+
+* **Text-only** models (Mistral, Phi, LLaMA)
+* **Vision** models (check if vision input is supported)
+* Models with better CPU support or smaller size
+
+You can try other models by pulling and running them:
+
+```bash
+ollama run llama3.2:3b --verbose
+```
+
+### 🖼️ Run Vision Inference (Images)
 
 Download a sample image:
 
@@ -98,25 +116,88 @@ ollama run gemma3:4b --verbose
 > What is in the ./image.jpg file?
 ```
 
-This will take several **minutes** on the ROCK 5B (all CPU cores will max out). Time to try the server!
+This will take several **minutes** on the ROCK 5B (all CPU cores will max out). Move on to the next section while this is running.
 
-## 🚀 Setup on the GPU Server
+### Monitor resource usage (CPU, RAM)
 
-### 🔐 Step 7 – SSH into the Server
+Check out the **CPU usage**, by opening another terminal, SSH into ROCK5 and:
+
+```bash
+top  # shows you CPU/memory usage
+```
+
+Notice how all CPU cores are maxed out while processing the image. This is because Ollama is running on CPU only. The board has an NPU, but we are not using it now.
+
+Press **"q"** to exit `top` interface.
+
+To monitor the **memory usage**, use:
+
+```bash
+free -h
+```
+
+This shows you an overview of how much free memory you have in the system. Try different models, with different parameter sizes and try to find out how much memory each uses. Can you come up with a general formula?
+
+```
+1B models use => ??
+4B models use => ??
+... more?
+```
+
+Based on this, what would be the largest model we can run on the ROCK5?
+
+**NOTE**: Ollama actually keeps all models that you run cached in memory. So they will add up over time. You need to restart Ollama in between running models, to get a clear picture:
+
+```bash
+sudo systemctl restart ollama
+ollama run <some model> --verbose
+sudo systemctl restart ollama
+ollama run <another model> --verbose
+```
+
+### Quantization-Aware Gemma
+
+Gemma models are available in Quantization-Aware training versions. We'll see what this means in a later theory section.
+
+https://developers.googleblog.com/en/gemma-3-quantized-aware-trained-state-of-the-art-ai-to-consumer-gpus/
+
+Try running some of these models:
+
+```bash
+ollama run gemma3:1b-it-qat --verbose
+ollama run gemma3:4b-it-qat --verbose
+... more?
+```
+
+Compare their resource usage to the standard Gemma models. How many tokens / second? How much memory do they use?
+
+### 🚀 Setup on the GPU Server
+
+The ROCK5 is powerful, and can definitely handle language models very well. But for large vision models, we need some more powerful hardware. Time to try the server!
+
+### 🔐 SSH into the Server
 
 ```bash
 ssh root@10.26.28.XX
 ```
 
-### ⚙️ Step 8 – Install Ollama (x86\_64 + GPU)
+### ⚙️ Install Ollama (x86\_64 + GPU)
 
 ```bash
 curl -fsSL https://ollama.com/install.sh | sh
 ```
 
-Ollama will detect the NVIDIA GPU and enable GPU acceleration automatically.
+Ollama will detect the **NVIDIA GPU** and enable GPU acceleration automatically.
 
-### 🖼️ Step 9 – Vision Prompt on the Server
+Before we run tests, let's see how powerful our hardware is. Run the following command to show GPU specs:
+
+```bash
+nvidia-smi  # shows GPU info
+```
+
+How much memory does our GPU have? Which size models (billion parameters) do you expect we can run on this?
+
+### 🖼️ Vision Prompt on the Server
 
 Download the same image again:
 
@@ -138,26 +219,12 @@ prompt eval rate: 152.60 tokens/s
 eval rate: 71.95 tokens/s
 ```
 
-## 🔍 Step 10 – Explore Ollama Models
+That's **much faster** than the CPU-only Linux board. This shows you just how powerful GPUs are!
 
-Visit [https://ollama.com](https://ollama.com)
-Browse the models available — look for:
+### Try different models
 
-* **Text-only** models (Mistral, Phi, LLaMA)
-* **Vision** models (check if vision input is supported)
-* Models with better CPU support or smaller size
+Take your time to really play with this:
 
-You can try other models by pulling and running them:
+https://ollama.com/search
 
-```bash
-ollama pull phi:1.5
-ollama run phi:1.5
-```
-
-## 💡 Step 11 - Experiments
-
-* How big a model can you run on the ROCK 5B and server before it crashes?
-* How many seconds did Gemma vision inference take on ROCK 5B vs GPU server?
-* What’s the largest model you found on the Ollama website?
-
-**Take your time** to really play with this. Get a feel for how "smart" or "stupid" some of these models are.
+Can you get a feel for how "smart" or "stupid" some of these models are?
