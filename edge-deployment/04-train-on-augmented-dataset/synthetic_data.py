@@ -13,8 +13,6 @@ TRAIN_CSV = os.path.join(DATA_DIR, 'train.txt')
 OUTPUT_DIR = './synthetic'
 MODEL_NAME = "runwayml/stable-diffusion-v1-5"
 OLLAMA_MODEL = "gemma3:4b"
-
-# Prompt for Ollama
 DESCRIPTION_PROMPT = "Please describe this image in one sentence. Only output the description — no extra text."
 
 # Load class mapping: int → class name
@@ -26,55 +24,58 @@ def get_class_names():
         .to_dict()
     )
 
-# Load dataset paths
-def read_dataset(csv_file):
-    df = pd.read_csv(csv_file, header=None)
+# Load dataset and group by class
+def load_grouped_dataset(csv_path):
+    df = pd.read_csv(csv_path, header=None)
     df.columns = ["path", "fine_label", "coarse_label"]
-    return df
+    grouped = {}
+
+    for _, row in df.iterrows():
+        label_id = row["coarse_label"]
+        class_name = CLASSES[label_id]
+        full_path = os.path.join(DATA_DIR, row["path"])
+        grouped.setdefault(class_name, []).append(full_path)
+
+    return grouped
 
 print("🔄 Loading dataset and class names...")
 CLASSES = get_class_names()
-df = read_dataset(TRAIN_CSV)
-df = df.sample(n=100).reset_index(drop=True)  # random 100 samples
+grouped_data = load_grouped_dataset(TRAIN_CSV)
 
-# Load diffusion model
 print("🚀 Loading Stable Diffusion model...")
 pipe = StableDiffusionPipeline.from_pretrained(
     MODEL_NAME,
     torch_dtype=torch.float16
 ).to("cuda")
 
-# Run pipeline
-for _, row in df.iterrows():
-    img_path = os.path.join(DATA_DIR, row["path"])
-    label_id = row["coarse_label"]
-    class_name = CLASSES[label_id]
-    original_filename = os.path.basename(img_path).replace(".jpg", ".png")
+# Generate images
+for class_name, paths in grouped_data.items():
+    selected = random.sample(paths, min(len(paths), 10))  # 10 samples per class
 
-    if not os.path.exists(img_path):
-        print(f"⚠️ Skipping missing file: {img_path}")
-        continue
+    for img_path in selected:
+        original_filename = os.path.basename(img_path).replace(".jpg", ".png")
 
-    print(f"\n🖼️ Describing: {original_filename} (class: {class_name})")
+        if not os.path.exists(img_path):
+            print(f"⚠️ Skipping missing file: {img_path}")
+            continue
 
-    # Describe image using LLM
-    response = ollama.chat(
-        model=OLLAMA_MODEL,
-        messages=[{
-            'role': 'user',
-            'content': DESCRIPTION_PROMPT,
-            'images': [img_path]
-        }]
-    )
-    description = response['message']['content'].strip()
-    print(f"📜 Prompt: {description}")
+        print(f"\n🖼️ Describing: {original_filename} (class: {class_name})")
 
-    # Generate image from description
-    image = pipe(description).images[0]
+        response = ollama.chat(
+            model=OLLAMA_MODEL,
+            messages=[{
+                'role': 'user',
+                'content': DESCRIPTION_PROMPT,
+                'images': [img_path]
+            }]
+        )
+        description = response['message']['content'].strip()
+        print(f"📜 Prompt: {description}")
 
-    # Save to: synthetic/<class_name>/<original_filename>.png
-    class_dir = os.path.join(OUTPUT_DIR, class_name)
-    os.makedirs(class_dir, exist_ok=True)
-    output_path = os.path.join(class_dir, original_filename)
-    image.save(output_path)
-    print(f"✅ Saved: {output_path}")
+        image = pipe(description).images[0]
+
+        class_dir = os.path.join(OUTPUT_DIR, class_name)
+        os.makedirs(class_dir, exist_ok=True)
+        output_path = os.path.join(class_dir, original_filename)
+        image.save(output_path)
+        print(f"✅ Saved: {output_path}")
