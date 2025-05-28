@@ -83,3 +83,67 @@ You’re already using VSCode to edit your scripts. Now, in the VSCode file expl
 ```
 
 Click on `generated-image.png` to open and view your image inside VSCode.
+
+Absolutely — here’s the **second half of the `README.md`** for Lab 3, starting right after the students generate their first image.
+
+It explains the reasoning behind synthetic data generation, introduces the idea of using an LLM to generate prompts from dataset images, and ends with the final exercise where they build `synthetic-data.py`.
+
+### Generating Synthetic Data
+
+You just created a new image based on a single prompt. That’s cool — but imagine doing this **for hundreds of images**. This is what synthetic data generation is all about.
+
+In many real-world scenarios (especially in industry), we run into **imbalanced datasets** — some classes have lots of examples, others have very few. Diffusion models can help fix that.
+
+Instead of manually writing dozens of prompts for each class, we can **automate prompt generation** using our vision-capable LLM.
+
+### Let Ollama Write the Prompts
+
+We already have a script for that!
+
+Run the following script to describe 10 random images from the training dataset:
+
+```bash
+python describe-dataset.py
+````
+
+This script:
+
+* Loads 10 random images
+* Sends each one to `gemma3:4b` via the Ollama API
+* Asks the model to describe the image in one sentence
+
+Each description is a **natural-language prompt** that can be passed directly to your diffusion model.
+
+### Combine Both Ideas
+
+You now have:
+
+* A script that generates **prompts** from real dataset images (`describe-dataset.py`)
+* A script that generates **images** from prompts (`generate-image.py`)
+
+Your final task: **write a new script that connects these two steps**.
+
+### Your Task: Create `synthetic-data.py`
+
+Create a new script called `synthetic-data.py`. This script should:
+
+1. Load a set of image paths from the dataset
+2. Describe each image using Ollama
+3. Use the description as a prompt to generate a new image
+4. Save the synthetic image to disk
+
+Use the existing scripts as a reference. You’ll just be **combining them** into one automated pipeline.
+
+### 💡 Tips
+
+* You can reuse the prompt logic and loop from `describe-dataset.py`
+* You can copy the generation logic from `generate-image.py`
+* Save each generated image with a name based on its source, e.g. `synthetic_<original_filename>.png`
+
+### 🎯 Goal
+
+By the end of this lab, you will have:
+
+* Automatically described real images using an LLM
+* Generated synthetic grocery product images from those descriptions
+* Created your first mini synthetic dataset!
