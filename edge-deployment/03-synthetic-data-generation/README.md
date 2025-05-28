@@ -57,7 +57,7 @@ We’ve included a Python script called `generate-image.py` that generates an im
 Try it like this:
 
 ```bash
-python generate-image.py "A wooden crate filled with ripe bananas in a grocery store"
+python generate-image.py "A wooden crate filled with bananas in a grocery store"
 ```
 
 This will:
@@ -70,7 +70,7 @@ You’ll see messages like:
 
 ```
 🖼️ Generating image for prompt:
-"A wooden crate filled with ripe bananas in a grocery store"
+"A wooden crate filled with bananas in a grocery store"
 ✅ Image saved as 'generated-image.png'
 ```
 
@@ -83,10 +83,6 @@ You’re already using VSCode to edit your scripts. Now, in the VSCode file expl
 ```
 
 Click on `generated-image.png` to open and view your image inside VSCode.
-
-Absolutely — here’s the **second half of the `README.md`** for Lab 3, starting right after the students generate their first image.
-
-It explains the reasoning behind synthetic data generation, introduces the idea of using an LLM to generate prompts from dataset images, and ends with the final exercise where they build `synthetic-data.py`.
 
 ### Generating Synthetic Data
 
@@ -139,6 +135,54 @@ Use the existing scripts as a reference. You’ll just be **combining them** int
 * You can reuse the prompt logic and loop from `describe-dataset.py`
 * You can copy the generation logic from `generate-image.py`
 * Save each generated image with a name based on its source, e.g. `synthetic_<original_filename>.png`
+
+### 🖥️ Monitor GPU Usage While Your Script Runs
+
+Once you’ve written your `synthetic-data.py` script, run it like this:
+
+```bash
+python synthetic-data.py
+````
+
+While it’s running, open **another terminal** and SSH into the same server again:
+
+```bash
+ssh root@10.26.X.Y  # same server as before
+```
+
+Then monitor GPU activity using:
+
+```bash
+watch -n 1 nvidia-smi
+```
+
+This command refreshes the GPU stats every second.
+
+You should see:
+
+* **GPU Utilization:** ~100% while generating images
+* **Memory Usage:** 7–12 GB depending on model
+* **Power Draw:** will spike during generation
+
+Example output:
+
+```
++---------------------------------------------------------------------------------------+
+| NVIDIA-SMI 535.247.01             Driver Version: 535.247.01   CUDA Version: 12.2     |
+|-----------------------------------------+----------------------+----------------------+
+| GPU  Name                 Persistence-M | Bus-Id        Disp.A | Volatile Uncorr. ECC |
+| Fan  Temp   Perf          Pwr:Usage/Cap |         Memory-Usage | GPU-Util  Compute M. |
+|                                         |                      |               MIG M. |
+|=========================================+======================+======================|
+|   0  NVIDIA RTX 4000 SFF Ada ...    On  | 00000000:02:00.0 Off |                  Off |
+| 53%   75C    P2              56W /  70W |   7988MiB / 20475MiB |    100%      Default |
+|                                         |                      |                  N/A |
++-----------------------------------------+----------------------+----------------------+
+```
+
+> 💡 This is a great way to **visually see** that your GPU is doing actual work. It also gives insight into how demanding diffusion models are, and why they're best suited for high-performance hardware.
+
+To stop the monitoring view, press `Ctrl + C`.
 
 ### 🎯 Goal
 
