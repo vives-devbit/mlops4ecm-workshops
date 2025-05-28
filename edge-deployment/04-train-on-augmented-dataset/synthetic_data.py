@@ -48,16 +48,25 @@ pipe = StableDiffusionPipeline.from_pretrained(
     torch_dtype=torch.float16
 ).to("cuda")
 
-# Generate images
-for class_name, paths in grouped_data.items():
-    selected = random.sample(paths, min(len(paths), 10))  # 10 samples per class
+MAX_IMAGES_PER_CLASS = 10
 
-    for img_path in selected:
-        original_filename = os.path.basename(img_path).replace(".jpg", ".png")
+# Track how many images we've generated per class
+generated_count = {cls: 0 for cls in grouped_data.keys()}
 
-        if not os.path.exists(img_path):
-            print(f"⚠️ Skipping missing file: {img_path}")
+# Round-robin style generation
+for i in range(MAX_IMAGES_PER_CLASS):
+    for class_name, paths in grouped_data.items():
+        if generated_count[class_name] >= MAX_IMAGES_PER_CLASS:
+            continue  # skip if max reached for this class
+
+        # Find remaining unused images for this class
+        available = [p for p in paths if os.path.exists(p)]
+        if not available:
+            print(f"⚠️ No available images for class: {class_name}")
             continue
+
+        img_path = random.choice(available)
+        original_filename = os.path.basename(img_path).replace(".jpg", ".png")
 
         print(f"\n🖼️ Describing: {original_filename} (class: {class_name})")
 
