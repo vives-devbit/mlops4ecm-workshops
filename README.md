@@ -7,10 +7,8 @@ In this repo, you can find content for the workshops on Machine Learning Operati
 
 This is part of the TETRA MLOps4ECM project. See the website: [https://mlops4ecm.be/](https://mlops4ecm.be/)
 
-### Building ML Infrastructure
+### Folders in this repo
 
-* [ml-infrastructure/](ml-infrastructure/): Day 2 of the workshops
-
-### Edge AI Deployment
-
-* [edge-deployment/](edge-deployment/): Day 3 of the workshops
+* [edge-deployment/](edge-deployment/): Edge AI Deployment
+* [generative-ai/](generative-ai/): Practical Generative AI
+* [ml-infrastructure/](ml-infrastructure/): Building ML Infrastructure

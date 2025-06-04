@@ -7,7 +7,7 @@ This workshop is part of the "Building ML Infrastructure" course:
 - 🎧 Listen to the [podcast episodes](https://mlops4ecm.be/handleidingen/ml-infrastructure/) for an audio companion
 - 📄 Download the [slide deck (PDF)](https://mlops4ecm.be/handleidingen/Building%20ML%20Infrastructure.pdf) for a visual summary
 
-Whether you prefer reading, listening, or watching — we've got you covered.
+Whether you prefer reading, listening, or experimenting — we've got you covered.
 
 ## 🧭 Lab Overview
 
