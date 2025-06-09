@@ -1,10 +1,6 @@
 
 # Practical Generative AI: Building and Deploying Custom Applications
 
-This workshop is part of the **"Practical Generative AI"** course:
-
-- 📄 Download the [slide deck (PDF)](https://mlops4ecm.be/handleidingen/Practical%20Generative%20AI.pdf) for a visual summary
-
 ## 🧭 Lab Overview
 
 <img src="../media/generative-ai.png" style="width: 300px" align="right">
@@ -33,17 +29,17 @@ Use the LLM more creatively by calling it multiple times: first to generate a ta
 
 Bring your AI-generated stories to life by adding custom illustrations using a diffusion model. First, you’ll explore how to generate images from text, and then you’ll combine everything into a single system that creates both story and visuals together.
 
-### Lab 6 – Build a Simple Gradio App
+### Lab 6 – [Build a Simple Gradio App](06-simple-gradio-app)
 
-Wrap your story generation code in a basic Gradio user interface. Start small: take a prompt and return a generated story. Optionally include image input or generated output. Get familiar with how Gradio works.
+Wrap your story generation code in a basic Gradio user interface. Start small: take a prompt and return a generated story. Additionally include image input or generated output. Get familiar with how Gradio works.
 
-### Lab 7 – Create an Interactive Storytelling App
+### Lab 7 – [Create an Interactive Storytelling App](07-interactive-app)
 
-Turn your notebook project into a full interactive Gradio application. Let the user make decisions between chapters that guide the story’s direction. Automatically generate and display chapter text, branching choices, and illustrations. End the day with your own playable, AI-powered story app.
+Turn the storytelling project into a full interactive Gradio application. Let the user make decisions between chapters that guide the story’s direction. Automatically generate chapter text and branching choices.
 
-### Lab 8 – Explore Other Modalities
+### Lab 8 – [Explore Other Modalities](08-other-modalities)
 
-Broaden your generative AI toolkit by experimenting with additional input and output modalities beyond text and images. In this final lab, you’ll explore new types of models — such as **text-to-speech**, **image editing** or **depth estimation** — using easy-to-use Hugging Face pipelines.
+Broaden your generative AI toolkit by experimenting with additional input and output modalities beyond text and images. In this final lab, you’ll explore new types of models — such as **speech-to-text**, **image inpainting** and **music generation**.
 
 ## 🚀 Goal of the Workshop
 
@@ -54,7 +50,7 @@ By the end of these labs, you'll have built and deployed a complete generative A
 - Creates custom illustrations with **diffusion models**
 - Offers an interactive storytelling experience through a **web interface**
 
-You'll also gain practical experience with tools like **OLAMA**, **Hugging Face Transformers**, **Stable Diffusion**, and **Gradio** — running entirely on a GPU-powered Linux virtual machine through VS Code.
+You'll also gain practical experience with tools like **Ollama**, **Hugging Face Transformers**, **Stable Diffusion**, and **Gradio** — running entirely on a GPU-powered Linux virtual machine through VS Code.
 
 ## 🛠️ Prerequisites
 
