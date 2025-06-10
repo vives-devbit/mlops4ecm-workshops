@@ -18,8 +18,6 @@ The app is built using **Gradio**, and runs on your own **virtual machine**.
 generative-ai/07-interactive-app/interactive-story.ipynb
 ````
 
-3. Read through the code and **fix the TODO** before running it.
-
 ## 🔍 What the Code Does
 
 This app is structured as a **loop**:
