@@ -79,10 +79,11 @@ pkill python
 This will **kill all Python processes**, including any that are still using GPU memory.
 After that, just **reopen your notebook** and re-run the cells.
 
-Alternatively, you can:
+If that still doesn't work, try killing ollama as well:
 
-* Manually shut down old kernels in the **Jupyter kernel picker**
-* Or restart VS Code entirely
+```bash
+pkill ollama
+```
 
 ### 🧠 Bonus: Monitor GPU Memory
 
