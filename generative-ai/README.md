@@ -31,7 +31,7 @@ Bring your AI-generated stories to life by adding custom illustrations using a d
 
 ### Lab 6 – [Build a Simple Gradio App](06-simple-gradio-app)
 
-Wrap your story generation code in a basic Gradio user interface. Start small: take a prompt and return a generated story. Additionally include image input or generated output. Get familiar with how Gradio works.
+Build simple Gradio web apps that connect user inputs to language and vision models, enabling real-time AI-powered interactions. You create apps for text generation, image generation, image analysis, and even a stateful chatbot — all running locally on your virtual machine.
 
 ### Lab 7 – [Create an Interactive Storytelling App](07-interactive-app)
 
