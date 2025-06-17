@@ -8,7 +8,7 @@ def main():
     parser = argparse.ArgumentParser()
     parser.add_argument("--batch-size", type=int, default=32)
     parser.add_argument("--epochs", type=int, default=5)
-    parser.add_argument("--learning-rate", type=float, default=1e-3)
+    parser.add_argument("--learning-rate", type=float, default=5e-4)
     parser.add_argument("--output", type=str, default="model.pth")
     parser.add_argument("--synthetic", action="store_true", help="Include synthetic data in training set")
     args = parser.parse_args()

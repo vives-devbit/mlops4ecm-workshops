@@ -20,8 +20,8 @@ def main():
         prompt=prompt,
         num_inference_steps=20,
         guidance_scale=5,
-        width=512,
-        height=512
+        width=348,
+        height=348
     ).images[0]
 
     output_path = "generated-image.png"
