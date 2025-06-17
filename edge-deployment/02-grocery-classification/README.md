@@ -24,6 +24,8 @@ git clone https://github.com/AlexanderDhoore/<date>-mlops-workshops.git mlops-wo
 git clone https://github.com/marcusklasson/GroceryStoreDataset.git
 ```
 
+You can connect to the server using **VS Code Remote Connection** if you prefer it over the command line
+
 This will create:
 
 * `~/mlops-workshops/`: your working directory for this lab
@@ -33,7 +35,7 @@ This will create:
 
 Ollama provides a simple and clean Python API for interacting with large language and vision models.
 
-Open the file `02-grocery-classification/chat.py`:
+Open the file `edge-deployment/02-grocery-classification/01-chat.py`:
 
 ```python
 import ollama
@@ -63,14 +65,14 @@ source .venv/bin/activate
 
 cd ~/mlops-workshops/edge-deployment/02-grocery-classification/
 pip3 install -r requirements.txt
-python3 chat.py
+python3 01-chat.py
 ```
 
 ### 🖼️ Talking About Images
 
 When using the Python SDK, we must **explicitly pass image paths** to the model. Unlike the CLI (`ollama run`), images are not auto-detected.
 
-Look at the file `describe-image.py`. This script passes an image and a prompt to the model via the API.
+Look at the file `02-describe-image.py`. This script passes an image and a prompt to the model via the API.
 
 First, check out some sample images:
 
@@ -80,12 +82,12 @@ Alpro-Fresh-Soy-Milk.jpg  Banana.jpg        Green-Bell-Pepper.jpg  Oatly-Natural
 Arla-Standard-Milk.jpg    Granny-Smith.jpg  Lemon.jpg              Pink-Lady.jpg               Yellow-Onion.jpg
 ```
 
-Open this folder in VSCode and **inspect the images** visually.
+Open this folder in VS Code and **inspect the images** visually.
 
 Now try describing an image:
 
 ```python
-python3 describe-image.py ~/GroceryStoreDataset/sample_images/natural/<pick a file>.jpg
+python3 02-describe-image.py ~/GroceryStoreDataset/sample_images/natural/<pick a file>.jpg
 ```
 
 You should see a full visual description of the object in the image.
@@ -94,7 +96,7 @@ You should see a full visual description of the object in the image.
 
 So far, the model is generating full descriptions. But we can also ask it to **classify** an image.
 
-Open `classify-image.py`. The goal is for the model to return a **label** — just one class name — like “Apple”, “Carrots”, or “Yoghurt”.
+Open `03-classify-image.py`. The goal is for the model to return a **label** — just one class name — like “Apple”, “Carrots”, or “Yoghurt”.
 
 The classification logic lives entirely in the **prompt**.
 
@@ -109,9 +111,9 @@ Apple, Avocado, Banana, Kiwi, Lemon, Lime, Mango, Melon, Nectarine, Orange, Papa
 After writing your prompt, test it:
 
 ```bash
-> python3 classify-image.py ~/GroceryStoreDataset/sample_images/natural/Banana.jpg
+> python3 03-classify-image.py ~/GroceryStoreDataset/sample_images/natural/Banana.jpg
 Banana
-> python3 classify-image.py ~/GroceryStoreDataset/sample_images/natural/Pink-Lady.jpg
+> python3 03-classify-image.py ~/GroceryStoreDataset/sample_images/natural/Pink-Lady.jpg
 Apple
 ```
 
@@ -119,12 +121,12 @@ Apple
 
 Now that you can classify a single image, let’s try **evaluating** the model on part of the dataset.
 
-Edit `classify-dataset.py` and add your prompt.
+Edit `04-classify-dataset.py` and add your prompt.
 
 Then run:
 
 ```bash
-python3 classify-dataset.py
+python3 04-classify-dataset.py
 ```
 
 This script will:

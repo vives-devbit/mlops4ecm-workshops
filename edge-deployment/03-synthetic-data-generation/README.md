@@ -62,7 +62,7 @@ python generate-image.py "A wooden crate filled with bananas in a grocery store"
 
 This will:
 
-* Load a pretrained Stable Diffusion model (v1.5)
+* Load a pretrained Stable Diffusion model (3.5)
 * Generate an image from the prompt
 * Save it as `generated-image.png` in the current folder
 
@@ -74,15 +74,28 @@ You’ll see messages like:
 ✅ Image saved as 'generated-image.png'
 ```
 
-### View the Image in VSCode
+### ⚠️ CUDA: Out of Memory
 
-You’re already using VSCode to edit your scripts. Now, in the VSCode file explorer, navigate to:
+If the script crashes with a **"CUDA: Out of Memory"** error, this means the GPU memory is full. The reason why this happens is because both ollama and our diffusion model are using a ton of GPU memory.
+
+We need to stop all other software using the GPU. The quickest way to achieve this is to go into the terminal and run:
+
+```bash
+pkill python
+pkill ollama
+```
+
+This will kill any python or ollama processes on your machine. Now run `nvidia-smi` and see that all GPU memory has been freed.
+
+### View the Image in VS Code
+
+You’re already using VS Code to edit your scripts. Now, in the VS Code file explorer, navigate to:
 
 ```
 ~/mlops4ecm-workshops/edge-deployment/03-synthetic-data-generation/
 ```
 
-Click on `generated-image.png` to open and view your image inside VSCode.
+Click on `generated-image.png` to open and view your image inside VS Code.
 
 ### Generating Synthetic Data
 
@@ -161,7 +174,7 @@ This command refreshes the GPU stats every second.
 You should see:
 
 * **GPU Utilization:** ~100% while generating images
-* **Memory Usage:** 7–12 GB depending on model
+* **Memory Usage:** about 19 GB depending on model
 * **Power Draw:** will spike during generation
 
 Example output:
@@ -175,7 +188,7 @@ Example output:
 |                                         |                      |               MIG M. |
 |=========================================+======================+======================|
 |   0  NVIDIA RTX 4000 SFF Ada ...    On  | 00000000:02:00.0 Off |                  Off |
-| 53%   75C    P2              56W /  70W |   7988MiB / 20475MiB |    100%      Default |
+| 50%   77C    P2              63W /  70W |  19730MiB / 20475MiB |    100%      Default |
 |                                         |                      |                  N/A |
 +-----------------------------------------+----------------------+----------------------+
 ```

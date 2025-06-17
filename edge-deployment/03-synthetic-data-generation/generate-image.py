@@ -1,9 +1,6 @@
 import sys
 import torch
-from diffusers import StableDiffusionPipeline
-import warnings
-
-warnings.filterwarnings("ignore")
+from diffusers import StableDiffusion3Pipeline
 
 def main():
     if len(sys.argv) < 2:
@@ -13,13 +10,19 @@ def main():
     prompt = sys.argv[1]
 
     print("🔄 Loading Stable Diffusion model...")
-    pipe = StableDiffusionPipeline.from_pretrained(
-        "runwayml/stable-diffusion-v1-5",
-        torch_dtype=torch.float16
+    pipe = StableDiffusion3Pipeline.from_pretrained(
+        "ckpt/stable-diffusion-3.5-medium",
+        torch_dtype=torch.bfloat16
     ).to("cuda")
 
     print(f"🖼️ Generating image for prompt:\n\"{prompt}\"")
-    image = pipe(prompt).images[0]
+    image = pipe(
+        prompt=prompt,
+        num_inference_steps=20,
+        guidance_scale=5,
+        width=512,
+        height=512
+    ).images[0]
 
     output_path = "generated-image.png"
     image.save(output_path)

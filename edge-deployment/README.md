@@ -17,7 +17,7 @@ Welcome to the **Edge AI Optimization Workshop** — a practical, hands-on serie
 
 Each lab builds on the last, guiding you through the process of deploying AI models in constrained environments while maximizing performance.
 
-### Lab 01 – [First Steps with OLAMA](01-first-steps-with-olama/)
+### Lab 01 – [First Steps with Ollama](01-first-steps-with-ollama/)
 
 Run your first LLM and vision models on a ROCK 5B embedded device. Then compare to GPU inference on a server. Discover the limits of local AI execution and get familiar with prompt-based interactions.
 
@@ -57,7 +57,7 @@ By the end of this workshop, you'll have:
 - Trained and optimized your own models for edge deployment
 - Applied quantization and knowledge distillation to shrink models without sacrificing performance
 
-You'll gain practical experience with tools and formats like **OLAMA**, **Stable Diffusion**, **ONNX Runtime**, **Netron**, and **MobileNet** — all in the context of real, edge-oriented applications.
+You'll gain practical experience with tools and formats like **Ollama**, **Stable Diffusion**, **ONNX Runtime**, **Netron**, and **MobileNet** — all in the context of real, edge-oriented applications.
 
 ## 🛠️ Prerequisites
 

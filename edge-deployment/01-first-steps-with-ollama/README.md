@@ -1,4 +1,4 @@
-## 🧪 Lab 01 – First Steps with OLAMA
+## 🧪 Lab 01 – First Steps with Ollama
 
 > Run your first LLM and vision models on a ROCK 5B embedded device. Then compare to GPU inference on a server. Discover the limits of local AI execution and get familiar with prompt-based interactions.
 
@@ -20,13 +20,21 @@ ssh radxa@10.26.3.XX
 # password: radxa
 ````
 
+For example: if your board is named `Jirachi25`, the IP will be `10.26.3.25`.
+
 ### ⚙️ Install Ollama
+
+Begin by checking whether you have `Ollama` installed, which is a way of running large language models efficiently on all kinds of devices, including our Linux board.
+
+```bash
+ollama --help
+```
+
+If this prints the help text, you are good to go. Otherwise you need to install ollama:
 
 ```bash
 curl -fsSL https://ollama.com/install.sh | sh
 ```
-
-This will install `Ollama`, which is a way of running large language models efficiently on all kinds of devices, including our Linux board.
 
 * Installs `Ollama` software and CLI
 * Enables the `ollama` systemd service
@@ -51,13 +59,17 @@ Try a basic prompt:
 > What is an orange?
 ```
 
+Type `/bye` to exit the interactive chat.
+
 ### 🧪 Benchmark with `--verbose`
+
+You can easily do performance benchmarking with the `--verbose` flag:
 
 ```bash
 ollama run gemma3:1b --verbose
 ```
 
-You'll see detailed metrics:
+After asking a question, you'll see detailed metrics:
 
 * Total duration
 * Prompt evaluation time
@@ -70,9 +82,11 @@ prompt eval rate:     20.62 tokens/s
 eval rate:            13.67 tokens/s
 ```
 
+A "token" is a piece of a word. The more tokens per second, the better the performance.
+
 ### 📦 Try a Larger Model
 
-Now try the 4B model:
+Now try the 4B model, which has 4 **billion** parameters:
 
 ```bash
 ollama pull gemma3:4b
@@ -101,7 +115,17 @@ You can try other models by pulling and running them:
 ollama run llama3.2:3b --verbose
 ```
 
+Downloading large models takes quite a long time. To see a list of all the **models that are already on your device**, run:
+
+```bash
+ollama list
+```
+
+Play with some of these models and compare how they behave. Do you notice the difference in "intelligence" between the smaller and larger models?
+
 ### 🖼️ Run Vision Inference (Images)
+
+Modern large language models can also process images as input. These models are sometimes called "vision-language models". It's quite amazing that this is possible on a small edge device like our ARM board.
 
 Download a sample image:
 
@@ -136,11 +160,13 @@ To monitor the **memory usage**, use:
 free -h
 ```
 
-This shows you an overview of how much free memory you have in the system. Try different models, with different parameter sizes and try to find out how much memory each uses. Can you come up with a general formula?
+This shows you an overview of how much free memory you have in the system.
+
+**Try different models**, with different parameter sizes and try to find out how much memory each uses. Can you come up with a general formula?
 
 ```
-1B models use => ??
-4B models use => ??
+1B (billion) parameter models use => ??
+4B (billion) parameter models use => ??
 ... more?
 ```
 
@@ -157,33 +183,39 @@ ollama run <another model> --verbose
 
 ### Quantization-Aware Gemma
 
-Gemma models are available in Quantization-Aware training versions. We'll see what this means in a later theory section.
+Gemma models are available in Quantization-Aware training (QAT) versions. We'll see what this means in a later theory section.
 
 https://developers.googleblog.com/en/gemma-3-quantized-aware-trained-state-of-the-art-ai-to-consumer-gpus/
 
-Try running some of these models:
+Try running one of these models:
 
 ```bash
-ollama run gemma3:1b-it-qat --verbose
 ollama run gemma3:4b-it-qat --verbose
-... more?
 ```
 
-Compare their resource usage to the standard Gemma models. How many tokens / second? How much memory do they use?
+QAT models use the same amount of resources (CPU, RAM) as the standard models, but they should be a bit **more intelligent** because they have been trained to adapt to the quantization of the model (an optimization technique).
 
 ### 🚀 Setup on the GPU Server
 
-The ROCK5 is powerful, and can definitely handle language models very well. But for large vision models, we need some more powerful hardware. Time to try the server!
+The ROCK5 is powerful, and can definitely handle language models very well. But for large vision models, we need some more powerful hardware. Time to try the server! Our servers have dedicated NVIDIA GPUs, which are very good at running neural networks.
 
 ### 🔐 SSH into the Server
 
 ```bash
-ssh root@10.26.28.XX
+ssh root@10.26.XX.YY
 ```
+
+Please use the same YY number as your Rock 5B board. So if you are using `Jirachi25`, then SSH into virtual machine `10.26.XX.25`.
 
 ### ⚙️ Install Ollama (x86\_64 + GPU)
 
+Just like we did on the ROCK 5B, we will install ollama on the server:
+
 ```bash
+# check whether you have ollama:
+ollama --help
+
+# if not, install ollama like this:
 curl -fsSL https://ollama.com/install.sh | sh
 ```
 
@@ -221,10 +253,12 @@ eval rate: 71.95 tokens/s
 
 That's **much faster** than the CPU-only Linux board. This shows you just how powerful GPUs are!
 
-### Try different models
+### 🔍 Try different models
 
 Take your time to really play with this:
 
 https://ollama.com/search
 
-Can you get a feel for how "smart" or "stupid" some of these models are?
+Can you find any interesting models?
+
+There are models specialized for **coding**, models optimized for **reasoning**, and so much more.

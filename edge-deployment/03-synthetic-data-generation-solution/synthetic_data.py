@@ -3,7 +3,7 @@ import random
 import pandas as pd
 import ollama
 import torch
-from diffusers import StableDiffusionPipeline
+from diffusers import StableDiffusion3Pipeline
 from PIL import Image
 
 # Constants
@@ -11,7 +11,7 @@ DATA_DIR = os.path.expanduser('~/GroceryStoreDataset/dataset')
 CLASSES_CSV = os.path.join(DATA_DIR, 'classes.csv')
 TRAIN_CSV = os.path.join(DATA_DIR, 'train.txt')
 OUTPUT_DIR = './synthetic'
-MODEL_NAME = "runwayml/stable-diffusion-v1-5"
+MODEL_NAME = "ckpt/stable-diffusion-3.5-medium"
 OLLAMA_MODEL = "gemma3:4b"
 
 # Prompt for Ollama
@@ -39,9 +39,9 @@ df = df.sample(n=100).reset_index(drop=True)  # random 100 samples
 
 # Load diffusion model
 print("🚀 Loading Stable Diffusion model...")
-pipe = StableDiffusionPipeline.from_pretrained(
+pipe = StableDiffusion3Pipeline.from_pretrained(
     MODEL_NAME,
-    torch_dtype=torch.float16
+    torch_dtype=torch.bfloat16
 ).to("cuda")
 
 # Run pipeline
@@ -70,7 +70,13 @@ for _, row in df.iterrows():
     print(f"📜 Prompt: {description}")
 
     # Generate image from description
-    image = pipe(description).images[0]
+    image = pipe(
+        prompt=description,
+        num_inference_steps=20,
+        guidance_scale=5,
+        width=512,
+        height=512
+    ).images[0]
 
     # Save to: synthetic/<class_name>/<original_filename>.png
     class_dir = os.path.join(OUTPUT_DIR, class_name)

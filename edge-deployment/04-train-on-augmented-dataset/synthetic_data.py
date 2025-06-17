@@ -3,7 +3,7 @@ import random
 import pandas as pd
 import ollama
 import torch
-from diffusers import StableDiffusionPipeline
+from diffusers import StableDiffusion3Pipeline
 from PIL import Image
 
 # Constants
@@ -11,7 +11,7 @@ DATA_DIR = os.path.expanduser('~/GroceryStoreDataset/dataset')
 CLASSES_CSV = os.path.join(DATA_DIR, 'classes.csv')
 TRAIN_CSV = os.path.join(DATA_DIR, 'train.txt')
 OUTPUT_DIR = './synthetic'
-MODEL_NAME = "runwayml/stable-diffusion-v1-5"
+MODEL_NAME = "ckpt/stable-diffusion-3.5-medium"
 OLLAMA_MODEL = "gemma3:4b"
 DESCRIPTION_PROMPT = "Please describe this image in one sentence. Only output the description — no extra text."
 
@@ -43,9 +43,9 @@ CLASSES = get_class_names()
 grouped_data = load_grouped_dataset(TRAIN_CSV)
 
 print("🚀 Loading Stable Diffusion model...")
-pipe = StableDiffusionPipeline.from_pretrained(
+pipe = StableDiffusion3Pipeline.from_pretrained(
     MODEL_NAME,
-    torch_dtype=torch.float16
+    torch_dtype=torch.bfloat16
 ).to("cuda")
 
 MAX_IMAGES_PER_CLASS = 10
@@ -81,7 +81,13 @@ for i in range(MAX_IMAGES_PER_CLASS):
         description = response['message']['content'].strip()
         print(f"📜 Prompt: {description}")
 
-        image = pipe(description).images[0]
+        image = pipe(
+            prompt=description,
+            num_inference_steps=20,
+            guidance_scale=5,
+            width=512,
+            height=512
+        ).images[0]
 
         class_dir = os.path.join(OUTPUT_DIR, class_name)
         os.makedirs(class_dir, exist_ok=True)
