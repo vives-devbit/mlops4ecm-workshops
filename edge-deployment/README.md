@@ -33,19 +33,15 @@ Use Stable Diffusion and large language models to augment your dataset. Focus on
 
 <img src="../media/edge-ai-industrial-robotics.jpg" style="width: 300px" align="right">
 
-Train a convolutional model (e.g. MobileNet) on the combined real and synthetic dataset. Compare performance against a baseline trained on only real data.
+Train a convolutional model (e.g. MobileNet) on the combined real and synthetic dataset.
 
-### Lab 05 – [Optimize Deployment with ONNX Runtime](05-onnx-runtime-optimization/)
+### Lab 05 – [Explore Whisper Model through ONNX](05-explore-whisper/)
 
-Export your model to ONNX, run it on the ROCK 5B using ONNX Runtime, and apply quantization to reduce inference time. Learn how to visualize and understand neural network graphs.
+Explore OpenAI's Whisper model, which uses a transformer architecture for audio transcription (audio to text). Try it out, learn about its structure, export parts of it to ONNX format, and visualize the model using Netron.
 
-### Lab 06 – [Distill a Smaller Model](06-knowledge-distillation/)
+### Lab 06 – [Optimize Deployment with ONNX Runtime](06-deploy-whisper/)
 
-Train a small model (MobileNet) using outputs from a larger teacher model (e.g. ResNet). Learn how knowledge distillation can compress models while retaining performance — ideal for edge deployment.
-
-### Lab 07 – Validate Synthetic Data with CLIP Embeddings
-
-Use CLIP image embeddings to visually compare your real training dataset with the synthetic data. This lab helps you assess the quality of your synthetic images by analyzing how closely they align with the original data in embedding space.
+Export the full Whisper model to ONNX format, including pre- and post-processing. Run inference from Python using only ONNX Runtime as a dependency. Next, we will deploy this model on our ARM board using only C++ and ONNX Runtime — no Python dependencies!
 
 ## 🚀 Goal of the Workshop
 
@@ -54,8 +50,8 @@ By the end of this workshop, you'll have:
 - Run LLMs and vision models on embedded and server hardware
 - Evaluated pretrained models on real-world data
 - Used diffusion models for synthetic data generation
-- Trained and optimized your own models for edge deployment
-- Applied quantization and knowledge distillation to shrink models without sacrificing performance
+- Trained and optimized your own models for edge deployment (C++)
+- Applied quantization to shrink models without sacrificing performance
 
 You'll gain practical experience with tools and formats like **Ollama**, **Stable Diffusion**, **ONNX Runtime**, **Netron**, and **MobileNet** — all in the context of real, edge-oriented applications.
 

@@ -1,7 +1,7 @@
 
 ## Lab 04 – Train on Real + Synthetic Data
 
-> Train a convolutional model (e.g. MobileNet) on the combined real and synthetic dataset. Compare performance against a baseline trained on only real data.
+> Train a convolutional model (e.g. MobileNet) on the combined real and synthetic dataset.
 
 ### 🧪 Step 1: Generate Synthetic Data
 
@@ -40,17 +40,21 @@ python run_training.py
 
 # Real + synthetic data
 python run_training.py --synthetic
+
+# Try --epochs N to train for more epochs, to get a better model
 ```
 
 A working `data_utils.py` is already provided. You do **not** need to write any data loading logic.
 
 > ✅ Tip: Try training both with and without `--synthetic`, and compare validation accuracy.
 
+> I have to admit that, currently, there isn’t much of an improvement. I suspect this is because the validation dataset is very similar to the training dataset. The synthetic data helps the model generalize better to data outside the dataset, but this isn’t reflected in our accuracy score. Still, the general idea of synthetic data is a powerful one.
+
 ### 📷 Step 3: Explore Model Predictions
 
 Once your model is trained, use the notebook `prediction_gallery.ipynb` to explore how well it performs.
 
-Launch it in **VSCode**, using your existing virtual environment (`~/mlops-workshops/.venv`), and select a class to view predictions for real images in the validation set.
+Launch it in **VSCode**, using your existing virtual environment (`~/mlops-workshops/.venv`), and select a class to view predictions for real and synthetic images in the validation set.
 
 This is a great way to understand what your model is good at — and where it still fails.
 

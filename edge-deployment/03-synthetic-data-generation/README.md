@@ -31,7 +31,7 @@ This gives you access to Python, pip, and all dependencies used in this workshop
 Now go to the correct lab folder and install the dependencies for this exercise:
 
 ```bash
-cd ~/mlops4ecm-workshops/edge-deployment/03-synthetic-data-generation/
+cd ~/mlops-workshops/edge-deployment/03-synthetic-data-generation/
 pip install -r requirements.txt
 ```
 
@@ -39,8 +39,7 @@ This will install:
 
 * `diffusers` – for working with text-to-image models
 * `transformers` – model config and tokenization support
-* `torch` – runs the model on GPU
-* `safetensors`, `accelerate`, etc.
+* `torch`, `safetensors`, `accelerate`, etc.
 
 Make sure this finishes without errors before continuing.
 
@@ -92,7 +91,7 @@ This will kill any python or ollama processes on your machine. Now run `nvidia-s
 You’re already using VS Code to edit your scripts. Now, in the VS Code file explorer, navigate to:
 
 ```
-~/mlops4ecm-workshops/edge-deployment/03-synthetic-data-generation/
+~/mlops-workshops/edge-deployment/03-synthetic-data-generation/
 ```
 
 Click on `generated-image.png` to open and view your image inside VS Code.

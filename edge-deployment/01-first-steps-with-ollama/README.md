@@ -262,3 +262,11 @@ https://ollama.com/search
 Can you find any interesting models?
 
 There are models specialized for **coding**, models optimized for **reasoning**, and so much more.
+
+Our GPU has about 20 GB of VRAM, so you can try running much larger models than we have been up to now. For example:
+
+```bash
+ollama run deepseek-r1:32b
+```
+
+It's going to be slower, but far more intelligent.

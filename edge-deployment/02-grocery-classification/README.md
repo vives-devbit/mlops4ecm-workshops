@@ -35,7 +35,7 @@ This will create:
 
 Ollama provides a simple and clean Python API for interacting with large language and vision models.
 
-Open the file `edge-deployment/02-grocery-classification/01-chat.py`:
+Open the file `edge-deployment/02-grocery-classification/01-chat.py` in VS Code:
 
 ```python
 import ollama
