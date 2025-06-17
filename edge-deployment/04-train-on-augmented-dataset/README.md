@@ -24,13 +24,9 @@ Run it like this:
 python synthetic_data.py
 ````
 
-⚠️  Watch your disk usage as the script runs:
+⚠️  Because running the script takes very long, a generated folder synthetic/ has already been added to the repo.
 
-```bash
-df -h
-```
-
-You can always delete the `./synthetic/` folder and regenerate fewer images if needed.
+You can try to run the script yourself, but it's actually optional. To stop the script press **CTRL + C**
 
 ### 🧠 Step 2: Train Your Model
 
@@ -69,17 +65,3 @@ This notebook helps you:
 
 Now extend it to **include synthetic data** as well. Did class imbalance improve?
 How does the class distribution change once you include the balanced synthetic dataset?
-
-### 🧩 Bonus Challenge: Adjust Synthetic Sampling
-
-The synthetic dataset is currently balanced — but you could improve things further.
-
-Try editing `synthetic_data.py` to:
-
-* Focus only on **underrepresented classes**
-* Skip generation for classes that already have many real images
-* Prioritize a more meaningful distribution
-
-You don’t need to fully rebalance the real+synthetic dataset — just try to make the synthetic data helpful.
-
-This is how real-world ML engineers think about **data-centric AI**: the quality and balance of your dataset matter more than fancy model tweaks.

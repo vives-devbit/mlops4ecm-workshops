@@ -74,8 +74,8 @@ for _, row in df.iterrows():
         prompt=description,
         num_inference_steps=20,
         guidance_scale=5,
-        width=348,
-        height=348
+        width=336,
+        height=336
     ).images[0]
 
     # Save to: synthetic/<class_name>/<original_filename>.png

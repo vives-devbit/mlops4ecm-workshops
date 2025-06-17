@@ -85,8 +85,8 @@ for i in range(MAX_IMAGES_PER_CLASS):
             prompt=description,
             num_inference_steps=20,
             guidance_scale=5,
-            width=348,
-            height=348
+            width=336,
+            height=336
         ).images[0]
 
         class_dir = os.path.join(OUTPUT_DIR, class_name)
