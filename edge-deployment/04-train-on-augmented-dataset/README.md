@@ -24,7 +24,7 @@ Run it like this:
 python synthetic_data.py
 ````
 
-⚠️  Because running the script takes very long, a generated folder synthetic/ has already been added to the repo.
+⚠️  Because running the script takes very long, a generated folder synthetic/ has already been added to the repo. Open it in VS Code and **explore the generated images**.
 
 You can try to run the script yourself, but it's actually optional. To stop the script press **CTRL + C**
 
